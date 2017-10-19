@@ -1,0 +1,16 @@
+outlook temperature humidity windy play?
+str str str bool str
+sunny hot high 0 no
+sunny hot high 1 no
+overcast hot high 0 yes
+rain mild high 0 yes
+rain cool normal 0 yes
+rain cool normal 1 no
+overcast cool normal 1 yes
+sunny mild high 0 no
+sunny cool normal 0 yes
+rain mild normal 0 yes
+sunny mild normal 1 yes
+overcast mild high 1 yes
+overcast hot normal 0 yes
+rain mild high 1 no
