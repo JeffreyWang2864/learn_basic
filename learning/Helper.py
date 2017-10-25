@@ -1,6 +1,8 @@
 import os
 import numpy as np
 from matplotlib import pyplot as plt
+import re
+import jieba
 
 class Util:
     def __init__(self):
@@ -22,6 +24,15 @@ class Util:
         if min > target:
             return min
         return target
+    def EUCLID_SIM(self, d1, d2):
+        return 1.0 / (1.0 + np.linalg.norm(d1 - d2))
+    def PEARSON_SIM(self, d1, d2):
+        if len(d1) < 3: return 1.0
+        return 0.5 + 0.5 * np.corrcoef(d1, d2, rowvar=0)[0][1]
+    def COSINE_SIM(self, d1, d2):
+        num = float(d1.transpose() * d2)
+        denom = np.linalg.norm(d1) * np.linalg.norm(d2)
+        return 0.5 + 0.5 * (num / denom)
     def SplitDataSet(self, DataLen, test_proportion = 0.2, mode ="DEFAULT"):
         """
         mode --- decides the way function operates with your input data
@@ -86,28 +97,25 @@ class DataPreprocessing:
         self.FLOAT = float
         self.STR = str
         self.__DATA_FORMAT = (self.INT, self.FLOAT, self.STR)
+        self.CHINESE = re.compile(r'([\u4E00-\u9FA5]+|\w+)')
+        self.ENGLISH = re.compile(r'[a-z|A-Z]+')
+        self.__LANGUAGE = (self.CHINESE, self.ENGLISH)
         self.DataSet = None
         self.graph = None
-    def EUCLID_SIM(self, d1, d2):
-        return 1.0 / (1.0 + np.linalg.norm(d1 - d2))
-    def PEARSON_SIM(self, d1, d2):
-        if len(d1) < 3: return 1.0
-        return 0.5 + 0.5 * np.corrcoef(d1, d2, rowvar=0)[0][1]
-    def COSINE_SIM(self, d1, d2):
-        num = float(d1.transpose() * d2)
-        denom = np.linalg.norm(d1) * np.linalg.norm(d2)
-        return 0.5 + 0.5 * (num / denom)
     def __initGraph(self):
         self.graph = plt.figure()
-    def readSimpleDataSet(self, path, set_form, data_form, sep ="\t"):
-        assert set_form in self.__SET_FORMAT
-        assert data_form in self.__DATA_FORMAT
+    def __validPath(self, path):
         assert isinstance(path, str)
         if path[-4::] != ".txt":
             raise TypeError("Read file only support .txt format!")
         if not os.path.exists(Util().GetDirectory() + "/DATA/" + path):
-            print("File does not exist: %s"%path)
-            return None
+            print("File does not exist: %s" % path)
+            return False
+        return True
+    def readSimpleDataSet(self, path, set_form, data_form, sep ="\t"):
+        assert set_form in self.__SET_FORMAT
+        assert data_form in self.__DATA_FORMAT
+        assert self.__validPath(path)
         file  = open(Util().GetDirectory() + "/DATA/" + path, "r")
         data = list()
         lines = file.readlines()
@@ -118,6 +126,46 @@ class DataPreprocessing:
             data.append(tempData.copy())
         print("read file successful")
         self.DataSet = set_form(data)
+    def readParagraph(self, path):
+        assert self.__validPath(path)
+        file = open(Util().GetDirectory() + "/DATA/" + path, "r")
+        self.DataSet = list()
+        lines = file.readlines()
+        for line in lines:
+            if len(line.strip()) > 1:
+                self.DataSet.append(line.strip())
+    def __curWords(self, sentence, language, Filter):
+        if language is self.ENGLISH:
+            words = [item.lower() for item in re.findall(language, sentence)]
+        elif language is self.CHINESE:
+            return [word for word in jieba.cut(" ".join(re.findall(language, sentence)))
+                       if word != " "]
+        words = [item for item in words if Filter(item)]
+        return words
+    def __generateDictionary(self, sentences):
+        ret = set()
+        for sentence in sentences:
+            ret = ret | set(sentence)
+        return list(ret)
+    def __getWordExistence(self, line, dictionary):
+        ret = [0] * len(dictionary)
+        for word in line:
+            if word in dictionary:
+                ret[dictionary.index(word)] += 1
+            else:
+                print("The word %s does not contain in the dictionary" % (word))
+        return ret
+    def wordBagging(self, language, set_form, Filter = lambda x: True):
+        assert set_form in self.__SET_FORMAT
+        assert language in self.__LANGUAGE
+        lineList = list()
+        for line in self.DataSet:
+            lineList.append(self.__curWords(line ,language, Filter))
+        dictionary = self.__generateDictionary(lineList)
+        dictMat = list()
+        for line in lineList:
+            dictMat.append(self.__getWordExistence(line, dictionary))
+        return dictionary, set_form(dictMat)
     def head(self, value = 10):
         return self.DataSet[::value]
     def tail(self, value = 10):
