@@ -20,7 +20,7 @@ class Regression:
         self.Title = None               #list, the title(name) of each vertical data
         self.independentVar = None      #list, column that user uses for regression
         self.Betas = None               #list, beta values after regression
-        self.Alpha = None               #float, alpha constant for linear regression
+        self.Alpha = 0.0               #float, alpha constant for linear regression (bias)
         self.r_square = None            #float, r square for test data
         self.Tree = None                #class<Node>, tree for tree based regression
         self.ITER_NUM = 30              #iter number for shrinking
@@ -89,7 +89,7 @@ class Regression:
         if pattern is None:
             return np.array(testData), np.array(testLabel)
         else: return np.array(testData), np.array(testLabel), testIndex
-    def LinearRegression(self, features = None, mode = "DEFAULT"):
+    def LinearRegression(self, features = None, mode = "DEFAULT", test_data = None, test_label = None):
         assert (mode in ("DEFAULT", "LSE") or mode in self.REG_METHOD or mode == self.TREE_BASED)
                                                                 #LSE: Least Square Method
         if mode == "LSE":
@@ -121,7 +121,7 @@ class Regression:
         for i in range(xData.shape[1]):
             xMean.append(np.mean(xData[:, i]))
         if mode in self.REG_METHOD:
-            return self.__Shrinking(xData, xMean, mode)
+            return self.__Shrinking(xData, xMean, test_data, test_label, mode)
         if mode == self.TREE_BASED:
             return self.__TreeBasedRegression(xData)
         betas = np.dot(np.linalg.inv(np.dot(np.transpose(xData), xData)),
@@ -131,7 +131,7 @@ class Regression:
             alpha -= xMean[i] * betas[i]
         self.Betas = [float(item) for item in betas]
         self.Alpha = float(alpha)
-    def __Shrinking(self, xData, xMean, mode):
+    def __Shrinking(self, xData, xMean, testD, testL, mode):
         def GetRidgeWeight(param = 0.2):
             xVector = xDifference.transpose() * xDifference
             xVector += np.eye(xDifference.shape[1]) * param
@@ -151,7 +151,20 @@ class Regression:
                 weights[i, :] = GetRidgeWeight(np.exp(i-10)).transpose()
             elif mode == self.STAGEWISE_REGRESSION:
                 weights[i, :] = GetStageWise().transpose()
-        return weights   #fix later
+        #starts cross validation here
+        bestWeight = weights[0]
+        self.r_square = 0.0
+        for weight in weights:
+            self.Betas = weight
+            newR, predicted = self.SmartTest(testD, testL)
+            if newR < 0:
+                if newR < self.r_square:
+                    self.r_square = newR
+                    bestWeight = weight
+            elif newR > self.r_square:
+                self.r_square = newR
+                bestWeight = weight
+        self.Betas = bestWeight
     def __LeastSquareMethod(self, feature):
         xData = np.mat(self.DataSet[:, feature])
         xMean = np.mat(np.repeat(np.mean(xData), xData.shape[1]))
@@ -245,7 +258,7 @@ class Regression:
             predict = float(predict)
         else:
             for i in range(len(inputs)):
-                predict += self.Betas[i] * inputs[i]
+                predict += float(self.Betas[i]) * inputs[i]
         return predict
     def __treeBasedPredict(self, inputs):
         def regTreeEval(tree, inputs):
