@@ -101,7 +101,9 @@ class DataPreprocessing:
         self.ENGLISH = re.compile(r'[a-z|A-Z]+')
         self.__LANGUAGE = (self.CHINESE, self.ENGLISH)
         self.DataSet = None
+        self.Label = None
         self.graph = None
+        self.ExtraData = None
     def __initGraph(self):
         self.graph = plt.figure()
     def __validPath(self, path):
@@ -112,20 +114,30 @@ class DataPreprocessing:
             print("File does not exist: %s" % path)
             return False
         return True
-    def readSimpleDataSet(self, path, set_form, data_form, sep ="\t"):
+    def readSimpleDataSet(self, path, set_form, data_form, sep ="\t", add_title = False, add_label = False):
         assert set_form in self.__SET_FORMAT
         assert data_form in self.__DATA_FORMAT
+        assert isinstance(add_title, bool)
+        assert isinstance(add_label, bool)
         assert self.__validPath(path)
-        file  = open(Util().GetDirectory() + "/DATA/" + path, "r")
+        file = open(Util().GetDirectory() + "/DATA/" + path, "r")
         data = list()
         lines = file.readlines()
+        if add_label:
+            self.Label = list()
+        if add_title:
+            titleLine = lines.pop(0)
+            self.ExtraData = titleLine.strip().split(" ")
         for line in lines:
             tempData = list()
             splitData = line.strip().split(sep)
             tempData = [data_form(item) for item in splitData]
+            if add_label:
+                self.Label.append(tempData.pop())
             data.append(tempData.copy())
         print("read file successful")
         self.DataSet = set_form(data)
+        self.Label = set_form(self.Label)
     def readParagraph(self, path):
         assert self.__validPath(path)
         file = open(Util().GetDirectory() + "/DATA/" + path, "r")
