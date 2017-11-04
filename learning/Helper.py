@@ -138,14 +138,55 @@ class DataPreprocessing:
         print("read file successful")
         self.DataSet = set_form(data)
         self.Label = set_form(self.Label)
-    def readParagraph(self, path):
+    def readParagraph(self, path, add_label = False, sep ="\t"):
+        if add_label:
+            self.Label = list()
         assert self.__validPath(path)
         file = open(Util().GetDirectory() + "/DATA/" + path, "r")
         self.DataSet = list()
         lines = file.readlines()
         for line in lines:
             if len(line.strip()) > 1:
-                self.DataSet.append(line.strip())
+                if add_label:
+                    tempData = line.strip().split(sep)
+                    self.Label.append(int(tempData.pop()))
+                self.DataSet.append(tempData[0])
+    def separateDataSet(self, set_form, portion = 0.2, mode = "DEFAULT"):
+        assert set_form in self.__SET_FORMAT
+        assert self.DataSet is not None
+        assert isinstance(portion, float) or isinstance(portion, float)
+        assert 0.0 < portion < 1.0
+        assert mode in ("DEFAULT", "SAVE", "LOAD")
+        if self.Label is not None:
+            trainLabel, testLabel = list(), list()
+        trainData, testData = list(), list()
+        Lookup_Table = Util().SplitDataSet(len(self.DataSet), portion, mode)
+        for i in range(len(Lookup_Table)):
+            if Lookup_Table[i] == 0:
+                trainData.append(self.DataSet[i])
+                if self.Label is not None:
+                    trainLabel.append(self.Label[i])
+            elif Lookup_Table[i] == 1:
+                testData.append(self.DataSet[i])
+                if self.Label is not None:
+                    testLabel.append(self.Label[i])
+        self.DataSet = set_form(trainData)
+        if self.Label is not None:
+            self.Label = set_form(trainLabel)
+            return set_form(testData), set_form(testLabel)
+        return testData
+    def removeRedundantData(self):
+        if isinstance(self.DataSet, self.LIST):
+            raise TypeError("'list' object cannot do redundant")
+        else:
+            non_redundant = list()
+            for i in range(self.DataSet.shape[1]):
+                curVal = self.DataSet[1, i]
+                for item in self.DataSet[:, i]:
+                    if item != curVal:
+                        non_redundant.append(i)
+                        break
+        self.DataSet = self.DataSet[:, non_redundant]
     def __curWords(self, sentence, language, Filter):
         if language is self.ENGLISH:
             words = [item.lower() for item in re.findall(language, sentence)]
