@@ -604,8 +604,10 @@ class NaiveBayes:
                 line = line.replace("\n", "").split("\t")
                 if float(line[-1]) > 3.0:
                     Labels.append(1)
-                else: Labels.append(0)
-                Contents.append(line[0])
+                    Contents.append(line[0])
+                elif float(line[-1]) < 3.0:
+                    Labels.append(0)
+                    Contents.append(line[0])
         except IndexError and ValueError and KeyError: print('invalid file arrangement'); return None
         except: print('unknown error'); return None
         else: print('Read file successful')
@@ -675,7 +677,7 @@ class NaiveBayes:
         for line in DataSet:
             if line in self.Dictionary:
                 ret[self.Dictionary.index(line)] += 1
-            else: print("The word %s does not contain in the dictionary" % (line))
+            else: pass#print("The word %s does not contain in the dictionary" % (line))
         return ret
     def BuildModel(self):
         self.WordMat = list()
@@ -704,7 +706,7 @@ class NaiveBayes:
         if isinstance(inputs, str):
             inputs = self.CutWords(inputs, self.UsingEnglish)
             inputs = np.mat(self.__GetWordExistence(inputs))
-        p1 = float(inputs * self.DecisionBoundary['FirstClassBoundary'].transpose()) + np.log(self.DecisionBoundary['FirstClassProb']) - 7
+        p1 = float(inputs * self.DecisionBoundary['FirstClassBoundary'].transpose()) + np.log(self.DecisionBoundary['FirstClassProb']) + 1
         p2 = float(inputs * self.DecisionBoundary['SecondClassBoundary'].transpose()) + np.log(1.0 - self.DecisionBoundary['FirstClassProb'])
         if p1 > p2:
             return self.ResultLabels[1]
@@ -716,6 +718,8 @@ class NaiveBayes:
             predicts.append(self.Predict(testSet[i]))
             if predicts[i] != self.ResultLabels[testLabel[i]]:
                 error += 1
+            print(testSet[i])
+            print("predict: %s, actual: %s\n\n"%(predicts[i], self.ResultLabels[testLabel[i]]))
         return error / float(len(testSet)), predicts
 
 class knn:
