@@ -13,7 +13,7 @@ examples:
 3, k-means clustering
 ![alt text](https://github.com/JeffreyWang2864/learn_baslc/blob/master/learning/images/kmean_clustering.png)
 
-4, dimension decrease
+4, dimension reduction
 ![alt text](https://github.com/JeffreyWang2864/learn_baslc/blob/master/learning/images/dimension%20decrease.png)
 
 5, knn classify
