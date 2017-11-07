@@ -229,6 +229,8 @@ class DataPreprocessing:
                 new.append(self.DataSet[item])
             self.DataSet = new
         else: self.DataSet = self.DataSet[totalRange]
+        self.Label = self.Label[totalRange]
+        pass
     def convertLevelToBool(self):
         assert self.DataSet is not None
         assert self.Label is not None
