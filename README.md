@@ -1,5 +1,5 @@
 # learn_baslc
-this repo contains basic deep learning and machine learning algorithms (so far).
+this repo contains basic machine learning and deep learning algorithms (so far).
 
 examples:
 
