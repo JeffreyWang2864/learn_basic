@@ -187,6 +187,9 @@ class DataPreprocessing:
                         non_redundant.append(i)
                         break
         self.DataSet = self.DataSet[:, non_redundant]
+        if self.Label is not None:
+            assert not isinstance(self.Label, list)
+            self.Label = self.Label[non_redundant]
     def balanceDataSet(self, ratio = (0.5, 0.5)):
         assert self.DataSet is not None
         assert self.Label is not None
