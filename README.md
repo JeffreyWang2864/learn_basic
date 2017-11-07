@@ -18,7 +18,6 @@ examples:
 
 5, knn classify
 ![alt text](https://github.com/JeffreyWang2864/learn_baslc/blob/master/learning/images/knn.png)
-[classification result](https://github.com/JeffreyWang2864/learn_baslc/blob/master/learning/images/knn_result.txt)
 
 6, logistics regression
 ![alt text](https://github.com/JeffreyWang2864/learn_baslc/blob/master/learning/images/logic%20regression.png)
