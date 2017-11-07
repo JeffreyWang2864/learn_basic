@@ -613,7 +613,7 @@ class NaiveBayes:
         else: print('Read file successful')
         self.DataSet = Contents
         self.Labels = Labels
-    def SeparateDataSet(self, TestSize = 0.2, mode = "DEFAULT"):
+    def SeparateDataSet(self, TestSize = 0.2, mode = "DEFAULT", if_return = False):
         assert mode in ("LOAD", "SAVE", "DEFAULT")
         TrainData, TrainLabel, TestData, TestLabel = list(), list(), list(), list()
         Lookup_Table = Util().SplitDataSet(len(self.DataSet), TestSize, mode)
@@ -624,8 +624,10 @@ class NaiveBayes:
             elif Lookup_Table[i] == 1:
                 TestData.append(self.DataSet[i])
                 TestLabel.append(int(self.Labels[i]))
-        self.DataSet = TrainData
-        self.Labels = TrainLabel
+        self.DataSet = np.array(TrainData)
+        self.Labels = np.array(TrainLabel)
+        if if_return:
+            return TestData, TestLabel, np.nonzero(np.array(Lookup_Table) == 1)[0]
         return TestData, TestLabel
     def CutWords(self, Sentences = None, isEnglish = True):
         if isEnglish:
@@ -680,10 +682,10 @@ class NaiveBayes:
             else: pass#print("The word %s does not contain in the dictionary" % (line))
         return ret
     def BuildModel(self):
-        self.WordMat = list()
-        for line in self.DataSet:
-            self.WordMat.append(self.__GetWordExistence(line))
-        self.WordMat = np.mat(self.WordMat)
+        # self.WordMat = list()
+        # for line in self.DataSet:
+        #     self.WordMat.append(self.__GetWordExistence(line))
+        # self.WordMat = np.mat(self.WordMat)
         vertical, horizontal = self.WordMat.shape
         pFirstClass = sum(self.Labels) / float(vertical)
         firstClassExistence = np.mat(np.ones(horizontal))
@@ -703,23 +705,21 @@ class NaiveBayes:
             "FirstClassProb" : pFirstClass
         }
     def Predict(self, inputs):
-        if isinstance(inputs, str):
-            inputs = self.CutWords(inputs, self.UsingEnglish)
-            inputs = np.mat(self.__GetWordExistence(inputs))
-        p1 = float(inputs * self.DecisionBoundary['FirstClassBoundary'].transpose()) + np.log(self.DecisionBoundary['FirstClassProb']) + 1
+        p1 = float(inputs * self.DecisionBoundary['FirstClassBoundary'].transpose()) + np.log(self.DecisionBoundary['FirstClassProb'])
         p2 = float(inputs * self.DecisionBoundary['SecondClassBoundary'].transpose()) + np.log(1.0 - self.DecisionBoundary['FirstClassProb'])
         if p1 > p2:
-            return self.ResultLabels[1]
-        else: return self.ResultLabels[0]
-    def SmartTest(self, testSet, testLabel = None):
+            return self.ResultLabels[1], p1
+        else: return self.ResultLabels[0], p2
+    def SmartTest(self, testSet, words, testLabel = None):
         error = int()
         predicts = list()
         for i in range(len(testSet)):
-            predicts.append(self.Predict(testSet[i]))
+            result, p = self.Predict(testSet[i])
+            predicts.append(result)
             if predicts[i] != self.ResultLabels[testLabel[i]]:
                 error += 1
-            print(testSet[i])
-            print("predict: %s, actual: %s\n\n"%(predicts[i], self.ResultLabels[testLabel[i]]))
+            print(words[i])
+            print("predict: %s, actual: %s\tparam: %.6f\n\n"%(predicts[i], self.ResultLabels[testLabel[i]], p))
         return error / float(len(testSet)), predicts
 
 class knn:
