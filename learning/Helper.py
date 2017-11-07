@@ -187,6 +187,66 @@ class DataPreprocessing:
                         non_redundant.append(i)
                         break
         self.DataSet = self.DataSet[:, non_redundant]
+    def balanceDataSet(self, ratio = (0.5, 0.5)):
+        assert self.DataSet is not None
+        assert self.Label is not None
+        assert not isinstance(self.Label, list)
+        assert isinstance(ratio, tuple)
+        assert len(ratio) == 2
+        assert sum(ratio) == 1.0
+        assert len(set(self.Label)) == 2
+        sign1, sign2 = int(), int()
+        firstSign = self.Label[0]
+        for item in self.Label:
+            if item == firstSign:
+                sign1 += 1
+            else: sign2 += 1
+        modification = (ratio[0]*len(self.Label) - sign1, ratio[1]*len(self.Label) - sign2)
+        range0 = np.nonzero(self.Label == firstSign)[0]
+        range1 = np.nonzero(self.Label != firstSign)[0]
+        if modification[0] > 0:
+            additional0 = np.array(
+                [np.random.randint(np.min(range0), np.max(range0)) for _ in range(int(modification[0]))])
+            range0 = np.hstack((range0, additional0))
+        elif modification[0] < 0:
+            range0 = range0[np.array([np.random.randint(0, range0.size)
+                                      for _ in range(int(range0.size + modification[0]))])]
+        if modification[1] > 0:
+            additional1 = np.array(
+                [np.random.randint(np.min(range1), np.max(range1)) for _ in range(int(modification[0]))])
+            range1 = np.hstack((range1, additional1))
+        elif modification[1] < 0:
+            range1 = range1[np.array([np.random.randint(0, range1.size)
+                                      for _ in range(int(range1.size + modification[1]))])]
+        totalRange = np.hstack((range0, range1))
+        if isinstance(self.DataSet, list):
+            r = totalRange.tolist()
+            new = list()
+            for item in r:
+                new.append(self.DataSet[item])
+            self.DataSet = new
+        else: self.DataSet = self.DataSet[totalRange]
+    def convertLevelToBool(self):
+        assert self.DataSet is not None
+        assert self.Label is not None
+        assert len(set(self.Label)) > 2
+        if isinstance(self.Label, list):
+            self.Label = np.array(self.Label)
+        labelRange = sorted(list(set(self.Label)))
+        boundary = (labelRange[0] + labelRange[-1])/2
+        range0 = np.nonzero(self.Label < boundary)[0]
+        range1 = np.nonzero(self.Label > boundary)[0]
+        self.Label[range0] = 0
+        self.Label[range1] = 1
+        totalRange = np.hstack((range0, range1))
+        self.Label = self.Label[totalRange]
+        if isinstance(self.DataSet, list):
+            r = totalRange.tolist()
+            new = list()
+            for item in r:
+                new.append(self.DataSet[item])
+            self.DataSet = new
+        else: self.DataSet = self.DataSet[totalRange]
     def __curWords(self, sentence, language, Filter):
         if language is self.ENGLISH:
             words = [item.lower() for item in re.findall(language, sentence)]
