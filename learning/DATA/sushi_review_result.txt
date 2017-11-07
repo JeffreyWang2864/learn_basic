@@ -1,0 +1,97 @@
+They take orders only from their regulars. So if you're new, don't even bother wasting your time driving all the way. Their kitchen closes an hour before the closing time. While they told us that only biriyani was available, we heard them taking dosa, naan and curry orders from adjacent tables. How would you get new customers if you only cater to serve the ones who frequent your place? We've been to plenty of Indian restaurants across US and this is the worst experience we've ever had! A note to the management; Either train your staff to be professional or hire folks who demonstrate basic courtesy required for such jobs.
+predict: negative, actual: negative	param: -586.205299
+
+
+Save your money and belly. This restaurant is the worst in Boston area. The service and food is sub optimal. We had an adverse reaction to this restaurant's food. Additionally, servers don't remember what you ordered and when you ask for something common with South Indian food (e.g.: chutney with your dosa, they tell you that chutney is not served with this dosa). It's a customer's decision on how to eat their food not the restaurant's. We later found out that the restaurant had not prepared chutney at all!!If you are reading this review, stay away from this restaurant, or if you do go, be ready to end up in the nearby Lahey clinic!
+predict: negative, actual: negative	param: -543.910848
+
+
+Timeline (Group of 5 - 2nd visit to restaurant)7:00 PM - Seated at table7:05 PM - Waiter poured water for 5 of us7:06 PM - Ordered 3 Appetizers7:15 PM - 2 out of 3 Appetizers delivered7:30 PM - 3rd Appetizer delivered7:31 PM - Ordered 3 entrees and bread7:55 PM - followed up with the waiter8:05 PM - smiled at the same waiter8:06 - 8:30 PM - exchange of smiles continue8:45 PM - entrees delivered9:00 PM - out the door we goExperienced fine-dining like timings at the most unprofessional non-fine dining restaurants. These folks seriously need to concentrate on their service. Also, the food is not consistent with what I had in my first visit.
+predict: negative, actual: negative	param: -425.031657
+
+
+Had been in this restaurant with my mom n dad. There were not many dishes in the buffet, just two. We though that there wud b refill, so we were waiting. But there was none. So we went for check, and the waiter told that by 3.15 we stop refilling the food, but we were not informed about it. If they wud have told us we wud not be waiting. I asked for check, waiter was very rude to me he did not refill the food but he wanted the full amount, he wanted to charge for everything that we did not even eat. Hope owner caters the need of customers rather than just being after taking out money for the hopeless service. NEVER GO BACK BACK AGAIN
+predict: negative, actual: negative	param: -583.552736
+
+
+Really disappointed!! I will give them 0 star. Ordered Paneer Butter Masala as a take out for my marriage anniversary, since we are vegetarian. They packed I think Chicken Butter Masala. We ate the gravy part and then realized it's chicken butter masala. This is really disgusting. We will never go to this place again.
+predict: negative, actual: negative	param: -268.132074
+
+
+Order for delivery on two separate occasions. Both times the food took over 1.5 hrs to arrive, I had to call (several times to just get them to pick up and not go to answering machine) and almost remind them of my order. And then the kicker...when the food arrived the driver sat for a few minutes on his phone out in the street while I wait at the door. What? Sure I'll wait while you finish talking and let my 1.5 hr delivery get colder. Don't let me rush you. I'd give one star if it were not for the fact that the food upon arrival has been pretty darn good. But not good enough to wait at least 1.5 hrs. Ambassador may not have been as good, but damn they were quick and made customer service and delivery a priority. Either address your delivery woes or simply don't offer delivery. Disclosure: order placed on a Saturday night at 8 pm via Foodler and arrived at 9:30. One appetizer and two curry dishes. Not really a large order.
+predict: negative, actual: negative	param: -885.138158
+
+
+I am so disappointed. We ordered delivery which came 80 minutes after placing the order. I had indicated we would pay cash- the driver had no cash for change. The prices were so high- plus there was already a delivery fee-- I was expecting amazing. It was awful. We ordered everything mild- and it was all incredibly spicy. Except the Poori and Chapatis, all bordered on so spicy, it was inedible. $50 for all of this- plus the Kheer arrived hot, probably because it was packed with hot food, not separated. Also, the rice came in a small styrofoam box, about half of what your typically get from any other Indian restaurant. Sadly, this was a HUGE waste of money. I'm sad as the restaurant in a few miles from home and we LOVE Indian food.
+predict: negative, actual: negative	param: -643.423971
+
+
+We were visiting Boston saw the reviews on yelp and decided to dine in at Godavari.This place is horrible and absolutely disorganized. TheOwner in the cash register did not have any sense ofUrgency.Place was crowded and they did not even take time To refill Food items in the Buffet .we had to wait for almost 1 hour to be seated with barely any food to eat.I must say the wait staff were very polite and courteous.I was very disappointed and will never visit this place again.
+predict: negative, actual: negative	param: -425.631875
+
+
+I visit last Sunday dinner with my friends and relative Sorry to say worst food for ever no taste , I order dosa bad smell and sambar horrible and chutney like jelly made by dry xoxo , I get stomach plain and I order some non veg all are kollywood movie names and cites . it's my  Menu Chitoor Chinese Noodles VegSzechwan style.$11.99.                                    Telangana Natukodi KuraSpecial chicken with bone.$13.99 I order natukodi means Organic Chicken Farming I get its normal chicken Bhutan Chicken Wings KidsNo spice.$6.99 this all chicken-tikka-masala no taste no aroma ,Paneer Dosa$9.99 it's like paneer burji even its very could I think like that may be ,Gobi Manchurian$8.99 horrible all food even we ask waiter some water no one take care the kidsalso ask to waiter it's call fine dine restaurant we not looking fine dine we looking good food we not coming back thank you
+predict: negative, actual: negative	param: -799.615760
+
+
+I went to godavari on a laborday long weekend after hearing some positive reviews from my friends..and i regret for that decision after i had my buffet. This place is small and there was a huge crowd and I had to wait for an hour to get our(7 members) turn. After getting in at around 145pm, most of the buffet items were empty, it took them around 15 minutes to fill them..no plates as well...finally after some waiting..got some plates...about food..vegetarian tasted fine with around 8 different options..in non-veg, there are 4 different chicken items which are not good at all. Seriously, None of them, even chicken biryaani. Overall we had a bad experience...definitely not worth the wait...i would not revisit this place.
+predict: negative, actual: negative	param: -602.333731
+
+
+Very bad chicken dum biryani. I would rather drive to Paradise Biryani Pointe, Lowell ,MA for Chicken/Goat Biryani.
+predict: negative, actual: negative	param: -105.320583
+
+
+First horrible experience at Godavari. Its around 2.30PM four of us reached for their lunch buffet. Items in menu sounded promising and few people items were missing and when i reached to them they said they would fill them up soon. But it took them forever to refill it. They had interesting item ulvacharu chicken in their course when i tried it first time i liked it and they vanished soon. It took them very long to refill and once they refilled i tried it was shocking it wasn't the same kind of chicken that we ate earlier it was tandoori chicken dumped in ulvacharu. The next one they had peanut chutney which was liquid enough to be called as sambar and it was ginger chutney rather than a peanut chutney. The items were not filled soon and we had to wait with empty plates they just managed to do some refill to make sure they are refilling till 3:30. Seriously a big disappointment over the weekend the fastest and tastiest chain in US for south Indian food turns out to be a disaster.
+predict: negative, actual: negative	param: -876.523544
+
+
+This review is for the weekday lunch buffet. Chaos reigned when I arrived around 130 pm. When I finally flagged down a server they directed me to a table but directed me to the buffet first. As a non-native, there was no indication what any of the dishes were. The food was cool and dried out. Spoons had been moved from one dish to another and so there was a lot of "cross talk". Dishes that looked spicy were mild and mild appearing dishes were fire-y. The only good thing was that my water glass was filled promptly. Don't plan on coming back.
+predict: negative, actual: negative	param: -489.187866
+
+
+I went with my parents on a Tuesday night and had a terrible experience. We ordered some idlies and few dosa. The food was not hot at all and tasted stale. Dosas were the worst I have had in my life. We got there at 7:15pm and the dosas arrived on our table at 8:20pm. Who serves this late!? Also, the service is general was terrible. We asked for chutney and we only got it after half n hour. Never order spring dosa! All they did was used mysore dosa and added RAW cabbage and green pepper. This restaurant is definitely losing its taste. I really hope they improve or at least keep their name. It used to be good. But like any other Indian restaurant, NOT ANY MORE! I feel bad that I took my parents here. They had a HORRIBLE experience.
+predict: negative, actual: negative	param: -651.228634
+
+
+I went on a Sunday for their lunch buffet. It was PACKED, but despite the large crowds we were able to get a seat quickly. The food was extremely good, but very spicy. We inquired about less spicy options in the buffet line, but were told that on the weekend, they kick up the spice level. Weekdays are a bit more tame, we were informed. I would love to go back on a weekday and see if I was better able to tolerate the spices! (For the record, I do not have the best spice tolerance, so others may be able to handle the food better than I).  The staff was phenomenal though! We were plowing through water, and they refilled our glasses the minute they emptied. A great experience overall.
+predict: positive, actual: positive	param: -585.478759
+
+
+Good Indian weekend buffet with many many options. Food was amazing. 10-15 mins wait on weekends
+predict: positive, actual: positive	param: -79.546249
+
+
+Hands down one of the best Indian restaurant to have South Indian style buffet. They have many options in buffet and their chicken and mutton biryani's are really flavorful and tasty. They also have 2-3 desserts and many other curry options. Have never ordered directly from menu. Would love to go there again.
+predict: positive, actual: positive	param: -258.346869
+
+
+The food was good and service provided by joys khan was good too. Overall a nice experience.
+predict: positive, actual: positive	param: -80.394452
+
+
+The food was good and service provided by joys khan was good too. Overall a nice experience.
+predict: positive, actual: positive	param: -80.394452
+
+
+The best indian food, especially the Andhra food. Also, great ambience and service. We keep going and will never stop! It's the best and affordable!!
+predict: positive, actual: positive	param: -115.263658
+
+
+This review is long overdue! We have visited this place almost a dozen times, mostly for the buffet. Their dishes are really authentic and extremely good (I am from South India, so I believe I am a good judge), and I am yet to taste a really bad dish from here! The staff are really friendly and the service is fine (I would not say great, but I am happy to overlook that for the food). Overall, a must visit place if you are a fan of south Indian food or if you want to try something different from the usual Indian fare.
+predict: positive, actual: positive	param: -418.939929
+
+
+We went to this place thinking of the former restaurant in that spot- Ambassador. then we realized it was a new restaurant but the food smelled really good, and it was packed with Indian folks. That was a great sign!My fiance wasn't too happy with the food, but it's not because it was bad, but because he's not fond of south Indian cuisine. He wanted your typical American-Indian food.. ya know, Chicken Tikka Masala and Lamb Korma, etc.I thought this food was delicious, spicy but packed with tons of flavor! We went on a Sunday afternoon and they had buffet. I checked-in with Yelp and got $2 off our check! In total, it was $30+ with tip included and water for drinks.
+predict: positive, actual: positive	param: -560.996676
+
+
+Everything was very fresh, lots of flavor. Dosas here are more bread-like, very filling. I was sad when Ambassador closed but I look forward to trying all the South Indian dishes here. Excellent!
+predict: positive, actual: positive	param: -182.712148
+
+
+"The best South Indian restaurant in the world"This restaurant should be ranked #1 so far as South Indian food is concerned. I was amazed at the unique way of care is taken to ensure that all customers are fully satisfied and taste all the variety available here. On the whole, the ambience, supremacy of the quality of each and every ingredient that go into the making of the dishes, the way the food is served, all make you feel that you are on the top of the world. This is the best South Indian restaurant of the world.
+predict: positive, actual: positive	param: -420.542478
+
+
+error rate: 0.000000%
