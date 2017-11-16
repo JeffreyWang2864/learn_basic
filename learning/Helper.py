@@ -97,6 +97,13 @@ class DataPreprocessing:
         self.FLOAT = float
         self.STR = str
         self.__DATA_FORMAT = (self.INT, self.FLOAT, self.STR)
+        self.FILE_CSV = 0
+        self.FILE_XML = 1
+        self.FILE_JSON = 2
+        self.FILE_XLSX = 3
+        self.FILE_TXT = 4
+        self.FILE_HTML = 5
+        self.__FILE_FORMAT = (self.FILE_CSV, self.FILE_XML, self.FILE_HTML, self.FILE_JSON, self.FILE_TXT, self.FILE_XLSX)
         self.CHINESE = re.compile(r'([\u4E00-\u9FA5]+|\w+)')
         self.ENGLISH = re.compile(r'[a-z|A-Z]+')
         self.__LANGUAGE = (self.CHINESE, self.ENGLISH)
@@ -151,6 +158,56 @@ class DataPreprocessing:
                     tempData = line.strip().split(sep)
                     self.Label.append(int(tempData.pop()))
                 self.DataSet.append(tempData[0])
+    def writeDataSet(self, name, form, use_label = True):
+        assert form in self.__FILE_FORMAT
+        def writeTXT():
+            file = open(Util().GetDirectory() + name + ".txt", 'w')
+            for i in range(len(self.DataSet)):
+                for item in self.DataSet[i]:
+                    file.write(str(item))
+                    if use_label:
+                        file.write(self.Label[i])
+                    file.write("\t")
+                file.write("\n")
+            file.close()
+            return 0
+        def writeCSV():
+            import csv
+            writer = csv.reader(open(Util().GetDirectory() + name + '.csv', 'wb'))
+            if not isinstance(self.DataSet, list):
+                if use_label:
+                    temp = np.vstack((self.DataSet.T, self.Label.T))
+                    temp.resize((self.DataSet.shape[1] + 1, self.DataSet.shape[0]))
+                    writer.writerows(temp.transpose())
+                else: writer.writerows(self.DataSet)
+            else: 
+                if use_label:
+                    temp = self.DataSet
+                    for i in range(len(temp)):
+                        temp[i] = temp[i].append(self.Label[i])
+                    writer.writerows(temp)
+                else: writer.writerows(self.DataSet)
+            writer.dialect()
+            return 0
+        def writeJSON():
+            pass            #fix
+            return 0
+        def writeXML():
+            return 0
+        def writeXLSX():
+            return 0
+        def writeHTML():
+            pass
+        def writeFileError():
+            raise TypeError("unable to write the file")
+        return {
+            self.FILE_TXT : writeTXT(),
+            self.FILE_CSV : writeCSV(),
+            self.FILE_JSON : writeJSON(),
+            self.FILE_XML : writeXML(),
+            self.FILE_XLSX : writeXLSX(),
+            self.FILE_HTML : writeHTML()
+        }.get(form, writeFileError())
     def separateDataSet(self, set_form, portion = 0.2, mode = "DEFAULT"):
         assert set_form in self.__SET_FORMAT
         assert self.DataSet is not None
