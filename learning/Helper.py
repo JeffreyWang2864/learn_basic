@@ -170,7 +170,7 @@ class DataPreprocessing:
                     file.write("\t")
                 file.write("\n")
             file.close()
-            return 0
+            return 1
         def writeCSV():
             import csv
             writer = csv.reader(open(Util().GetDirectory() + name + '.csv', 'wb'))
@@ -180,7 +180,7 @@ class DataPreprocessing:
                     temp.resize((self.DataSet.shape[1] + 1, self.DataSet.shape[0]))
                     writer.writerows(temp.transpose())
                 else: writer.writerows(self.DataSet)
-            else: 
+            else:
                 if use_label:
                     temp = self.DataSet
                     for i in range(len(temp)):
@@ -188,16 +188,69 @@ class DataPreprocessing:
                     writer.writerows(temp)
                 else: writer.writerows(self.DataSet)
             writer.dialect()
-            return 0
+            return 1
         def writeJSON():
-            pass            #fix
-            return 0
+            import json
+            writer = open(Util().GetDirectory() + name + ".json", 'wb')
+            if use_label:
+                contents = json.dumps((self.DataSet, self.Label))
+            else: contents = json.dumps((self.DataSet))
+            json.dump(contents, writer)
+            return 1
         def writeXML():
-            return 0
+            from xml.etree import ElementTree as et
+            root_node = et.Element("Table")
+            for i in range(len(self.DataSet)):
+                current = et.Element("Row")
+                for j in range(len(self.DataSet[i])):
+                    data_node = et.ElementTree(str(j))
+                    data_node.text = self.DataSet[i][j]
+                    current.append(data_node)
+                if use_label:
+                    label_node = et.Element("Label")
+                    label_node.text = self.Label[i]
+                    current.append(label_node)
+                root_node.append(current)
+            tree = et.ElementTree(root_node)
+            tree.write(Util().GetDirectory() + name + ".xml")
+            return 1
         def writeXLSX():
-            return 0
+            import xlwt
+            wbook = xlwt.Workbook()
+            wsheet = wbook.add_sheet("sheet 1")
+            for i in range(len(self.DataSet)):
+                for j in range(len(self.DataSet[i])):
+                    wsheet.write(i, j, self.DataSet[i][j], xlwt.easyxf('align: vertical center, horizontal center'))
+                if use_label:
+                    wsheet.write(i, len(self.DataSet[i]), self.Label[i],
+                                 xlwt.easyxf('align: vertical center, horizontal center'))
+            wbook.save(Util().GetDirectory() + name + ".xlsx")
+            return 1
         def writeHTML():
-            pass
+            file = open(Util().GetDirectory() + name + ".html", "w")
+            file.write("<!DOCTYPE HTML>\n")
+            file.write("<html>\n")
+            file.write("\t<head>\n")
+            file.write('\t\t<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\n')
+            file.write('\t\t<title> crawl result </title>\n')
+            file.write("\t</head>\n")
+            file.write("\t\t<table>\n")
+            for i in range(len(self.DataSet)):
+                file.write("\t\t\t<tr>\n")
+                for j in range(len(self.DataSet[i])):
+                    file.write("\t\t\t\t<td> ")
+                    file.write(self.DataSet[i][j])
+                    file.write("\t\t\t\t</td>\n")
+                if use_label:
+                    file.write("\t\t\t\t<td> ")
+                    file.write(self.Label[i])
+                    file.write("\t\t\t\t</td>\n")
+                file.write("\t\t\t</tr>\n")
+            file.write("\t\t</table>\n")
+            file.write("\t</body>\n")
+            file.write("</html>")
+            file.close()
+            return 1
         def writeFileError():
             raise TypeError("unable to write the file")
         return {
@@ -207,7 +260,7 @@ class DataPreprocessing:
             self.FILE_XML : writeXML(),
             self.FILE_XLSX : writeXLSX(),
             self.FILE_HTML : writeHTML()
-        }.get(form, writeFileError())
+        }.get(form, 0)
     def separateDataSet(self, set_form, portion = 0.2, mode = "DEFAULT"):
         assert set_form in self.__SET_FORMAT
         assert self.DataSet is not None

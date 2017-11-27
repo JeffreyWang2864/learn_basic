@@ -6,6 +6,7 @@ from machinelearning.classify import SupportVectorMachine as svm
 demo = svm()
 demo.ReadSimpleFile("testSet.txt")          #read data from file
 test_data, test_label = demo.SeparateDataSet()      #get test data and test label
+#demo.RadicalBias_Gaussian(20, 0.01, 200, "DISABLED")
 demo.Platt_SMO(20, 0.01, 200, "DISABLED")       #linear classification
 demo.GetLine(True)              #calculate the  decision boundary
 predicted = list()          #store the predict values

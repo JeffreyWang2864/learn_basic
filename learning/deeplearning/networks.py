@@ -9,7 +9,7 @@ class BackPropagation:
         self.biases = [np.random.randn(num, 1) for num in size[1::]]
         self.weights = [np.random.randn(curNum, preNum) for curNum, preNum in zip(size[::-1], size[1::])]
         self.EPOCHS = 0
-    def GD(self, trainData, eta):    #FP
+    def GD(self, trainData, eta):    #前向传播
         for i in range(self.EPOCHS):
             np.random.shuffle(trainData)
             nabla_bias = [np.zeros(b.shape) for b in self.biases]
@@ -32,9 +32,7 @@ class BackPropagation:
             result = np.dot(weight, activation) + bias
             results.append(result)
             activations.append(self.sigmoid(result))
-        #BP
-        
-        #add BP
+        #反向更新
 
 
 
