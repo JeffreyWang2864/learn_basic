@@ -1,4 +1,4 @@
-from Helper import DataPreprocessing
+from learning.Helper import DataPreprocessing
 
 demo = DataPreprocessing()
 demo.readSimpleDataSet("pca_dataset.txt", demo.ND_MAT, demo.FLOAT, "\t")

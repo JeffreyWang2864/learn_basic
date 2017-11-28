@@ -1,4 +1,4 @@
-from machinelearning.classify import knn
+from learning.machinelearning.classify import knn
 
 demo = knn()
 demo.ReadSimpleFile("datingTestSet.txt")

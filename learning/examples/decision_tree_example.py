@@ -1,4 +1,4 @@
-from machinelearning.classify import DecisionTree
+from learning.machinelearning.classify import DecisionTree
 
 demo = DecisionTree()
 demo.ReadSimpleFile("decis.txt")

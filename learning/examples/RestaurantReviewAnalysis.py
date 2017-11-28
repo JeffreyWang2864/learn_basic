@@ -1,5 +1,5 @@
-from machinelearning import classify
-from Helper import DataPreprocessing
+from learning.machinelearning import classify
+from learning.Helper import DataPreprocessing
 
 
 demo = DataPreprocessing()

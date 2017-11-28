@@ -1,7 +1,7 @@
 import numpy as np
 
-from Helper import Util
-from machinelearning.classify import SupportVectorMachine as svm
+from learning.Helper import Util
+from learning.machinelearning.classify import SupportVectorMachine as svm
 
 demo = svm()
 demo.ReadSimpleFile("testSet.txt")          #read data from file

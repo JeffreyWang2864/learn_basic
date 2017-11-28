@@ -1,6 +1,6 @@
 import numpy as np
-from machinelearning import classify as mc
-from machinelearning import regression as mr
+from learning.machinelearning import classify as mc
+from learning.machinelearning import regression as mr
 
 class BackPropagation:
     def __init__(self, size):

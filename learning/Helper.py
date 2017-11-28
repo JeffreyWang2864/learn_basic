@@ -56,7 +56,7 @@ class Util:
                 self.SeparateDataSet_Pattern = Tabel
             return Tabel
     def GetDirectory(self):
-        return os.path.dirname(os.path.abspath(__file__))
+        return (os.path.dirname(os.path.abspath(__file__)) + "/")
     def plot_ROC_curve(self, DataLabel, PredictLabel):
         if isinstance(DataLabel, list):
             DataLabel = np.array(DataLabel)
@@ -165,15 +165,15 @@ class DataPreprocessing:
             for i in range(len(self.DataSet)):
                 for item in self.DataSet[i]:
                     file.write(str(item))
-                    if use_label:
-                        file.write(self.Label[i])
                     file.write("\t")
+                if use_label:
+                    file.write(self.Label[i])
                 file.write("\n")
             file.close()
             return 1
         def writeCSV():
             import csv
-            writer = csv.reader(open(Util().GetDirectory() + name + '.csv', 'wb'))
+            writer = csv.writer(open(Util().GetDirectory() + name + '.csv', 'wb'))
             if not isinstance(self.DataSet, list):
                 if use_label:
                     temp = np.vstack((self.DataSet.T, self.Label.T))
@@ -254,13 +254,13 @@ class DataPreprocessing:
         def writeFileError():
             raise TypeError("unable to write the file")
         return {
-            self.FILE_TXT : writeTXT(),
-            self.FILE_CSV : writeCSV(),
-            self.FILE_JSON : writeJSON(),
-            self.FILE_XML : writeXML(),
-            self.FILE_XLSX : writeXLSX(),
-            self.FILE_HTML : writeHTML()
-        }.get(form, 0)
+            self.FILE_TXT : writeTXT,
+            self.FILE_CSV : writeCSV,
+            self.FILE_JSON : writeJSON,
+            self.FILE_XML : writeXML,
+            self.FILE_XLSX : writeXLSX,
+            self.FILE_HTML : writeHTML
+        }.get(form, writeFileError)()
     def separateDataSet(self, set_form, portion = 0.2, mode = "DEFAULT"):
         assert set_form in self.__SET_FORMAT
         assert self.DataSet is not None

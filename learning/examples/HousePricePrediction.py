@@ -1,5 +1,5 @@
-from machinelearning.regression import Regression
-from Helper import DataPreprocessing
+from learning.machinelearning.regression import Regression
+from learning.Helper import DataPreprocessing
 import numpy as np
 
 data = DataPreprocessing()

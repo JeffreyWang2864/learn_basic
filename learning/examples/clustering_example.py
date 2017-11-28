@@ -1,4 +1,4 @@
-from machinelearning.clustering import Clustering
+from learning.machinelearning.clustering import Clustering
 
 demo = Clustering()
 demo.readSimpleFile("kmean_testSet2.txt")

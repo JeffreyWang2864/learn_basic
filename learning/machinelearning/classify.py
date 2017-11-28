@@ -4,7 +4,7 @@ import os
 import matplotlib.pyplot as plt
 import re
 from mpl_toolkits.mplot3d import Axes3D
-from Helper import Util
+from learning.Helper import Util
 
 class LogicRegression:
     def __init__(self):

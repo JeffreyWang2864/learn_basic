@@ -1,6 +1,6 @@
 import numpy as np
-from Helper import DataPreprocessing
-from Helper import Util
+from learning.Helper import DataPreprocessing
+from learning.Helper import Util
 
 def estimate(dataSet, user, simMethod, item, toggle_print = False):
     horizontal = dataSet.shape[1]

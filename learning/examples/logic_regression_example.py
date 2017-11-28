@@ -1,4 +1,4 @@
-from machinelearning.classify import LogicRegression
+from learning.machinelearning.classify import LogicRegression
 
 demo = LogicRegression()
 demo.ReadSimpleFile("testSet2.txt")

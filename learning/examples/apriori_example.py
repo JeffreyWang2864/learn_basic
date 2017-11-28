@@ -1,4 +1,4 @@
-from machinelearning.association import Apriori
+from learning.machinelearning.association import Apriori
 
 demo = Apriori()
 demo.ReadSimpleFile("association_test.txt")

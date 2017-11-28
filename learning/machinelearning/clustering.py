@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-from Helper import Util
+from learning.Helper import Util
 
 class Clustering:
     def __init__(self):
