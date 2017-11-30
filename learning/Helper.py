@@ -192,9 +192,12 @@ class DataPreprocessing:
         def writeJSON():
             import json
             writer = open(Util().GetDirectory() + name + ".json", 'wb')
+            if isinstance(self.DataSet, (np.ndarray, np.generic)):
+                data = self.DataSet.tolist()
+            else: data = self.DataSet
             if use_label:
-                contents = json.dumps((self.DataSet, self.Label))
-            else: contents = json.dumps((self.DataSet))
+                contents = json.dumps((data, self.Label))
+            else: contents = json.dumps(data)
             json.dump(contents, writer)
             return 1
         def writeXML():
@@ -203,8 +206,8 @@ class DataPreprocessing:
             for i in range(len(self.DataSet)):
                 current = et.Element("Row")
                 for j in range(len(self.DataSet[i])):
-                    data_node = et.ElementTree(str(j))
-                    data_node.text = self.DataSet[i][j]
+                    data_node = et.Element(str(j))
+                    data_node.text = str(self.DataSet[i][j])
                     current.append(data_node)
                 if use_label:
                     label_node = et.Element("Label")
@@ -224,7 +227,7 @@ class DataPreprocessing:
                 if use_label:
                     wsheet.write(i, len(self.DataSet[i]), self.Label[i],
                                  xlwt.easyxf('align: vertical center, horizontal center'))
-            wbook.save(Util().GetDirectory() + name + ".xlsx")
+            wbook.save(Util().GetDirectory() + name + ".xls")
             return 1
         def writeHTML():
             file = open(Util().GetDirectory() + name + ".html", "w")
@@ -239,11 +242,11 @@ class DataPreprocessing:
                 file.write("\t\t\t<tr>\n")
                 for j in range(len(self.DataSet[i])):
                     file.write("\t\t\t\t<td> ")
-                    file.write(self.DataSet[i][j])
+                    file.write(str(self.DataSet[i][j]))
                     file.write("\t\t\t\t</td>\n")
                 if use_label:
                     file.write("\t\t\t\t<td> ")
-                    file.write(self.Label[i])
+                    file.write(str(self.Label[i]))
                     file.write("\t\t\t\t</td>\n")
                 file.write("\t\t\t</tr>\n")
             file.write("\t\t</table>\n")
@@ -410,16 +413,16 @@ class DataPreprocessing:
         reconData = (lowData * finalEigVectors.transpose()) + meanValue
         self.DataSet = reconData
         return lowData
-    def graph2D(self, graphongIndexes = None, color = "#516EFF"):
-        if graphongIndexes is None:
+    def graph2D(self, graphingIndexes = None, color ="#516EFF"):
+        if graphingIndexes is None:
             x = np.array(self.DataSet[:, 0]).flatten()
             y = np.array(self.DataSet[:, 1]).flatten()
-        elif isinstance(graphongIndexes, list) or isinstance(graphongIndexes, tuple):
-            assert len(graphongIndexes) == 2
-            for item in graphongIndexes:
+        elif isinstance(graphingIndexes, list) or isinstance(graphingIndexes, tuple):
+            assert len(graphingIndexes) == 2
+            for item in graphingIndexes:
                 assert 0 <= item < self.DataSet.shape[1]
-            x = np.array(self.DataSet[:, graphongIndexes[0]]).flatten()
-            y = np.array(self.DataSet[:, graphongIndexes[1]]).flatten()
+            x = np.array(self.DataSet[:, graphingIndexes[0]]).flatten()
+            y = np.array(self.DataSet[:, graphingIndexes[1]]).flatten()
         if self.graph is None:
             self.__initGraph()
         graph = self.graph.add_subplot(111)

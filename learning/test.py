@@ -3,4 +3,4 @@ from learning.Helper import DataPreprocessing
 demo = DataPreprocessing()
 demo.readSimpleDataSet("pca_dataset.txt", demo.ND_ARRAY, demo.FLOAT)
 
-demo.writeDataSet("export", demo.FILE_CSV, False)
+demo.writeDataSet("export", demo.FILE_JSON, False)
