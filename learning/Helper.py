@@ -145,6 +145,9 @@ class DataPreprocessing:
         print("read file successful")
         self.DataSet = set_form(data)
         self.Label = set_form(self.Label)
+    def readXML(self, path, add_label = False):
+        assert isinstance(path, str)
+        assert os.path.exists(Util().GetDirectory() + path + ".xml")
     def readParagraph(self, path, add_label = False, sep ="\t"):
         if add_label:
             self.Label = list()
