@@ -3,8 +3,8 @@ from learning.Helper import DataPreprocessing
 import numpy as np
 
 data = DataPreprocessing()
-data.readSimpleDataSet("house_price.txt", set_form=data.ND_ARRAY,
-                       data_form=data.FLOAT, sep=" ", add_title=True, add_label=True)
+data.readSimpleDataSet("house_price.txt", set_form=data.SETTYPE_NDARRAY,
+                       data_form=data.DATATYPE_FLOAT, sep=" ", add_title=True, add_label=True)
 title = data.ExtraData
 rawData = data.DataSet
 label = data.Label

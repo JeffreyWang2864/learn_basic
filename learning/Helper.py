@@ -105,14 +105,14 @@ class Util:
 class DataPreprocessing:
 
     def __init__(self):
-        self.LIST = list
-        self.ND_ARRAY = np.array
-        self.ND_MAT = np.mat
-        self.__SET_FORMAT = (self.LIST, self.ND_ARRAY, self.ND_MAT)
-        self.INT = int
-        self.FLOAT = float
-        self.STR = str
-        self.__DATA_FORMAT = (self.INT, self.FLOAT, self.STR)
+        self.SETTYPE_LIST = list
+        self.SETTYPE_NDARRAY = np.array
+        self.SETTYPE_NDMAT = np.mat
+        self.__SET_FORMAT = (self.SETTYPE_LIST, self.SETTYPE_NDARRAY, self.SETTYPE_NDMAT)
+        self.DATATYPE_INT = int
+        self.DATATYPE_FLOAT = float
+        self.DATATYPE_STRING = str
+        self.__DATA_FORMAT = (self.DATATYPE_INT, self.DATATYPE_FLOAT, self.DATATYPE_STRING)
         self.FILE_CSV = 0
         self.FILE_XML = 1
         self.FILE_JSON = 2
@@ -120,9 +120,9 @@ class DataPreprocessing:
         self.FILE_TXT = 4
         self.FILE_HTML = 5
         self.__FILE_FORMAT = (self.FILE_CSV, self.FILE_XML, self.FILE_HTML, self.FILE_JSON, self.FILE_TXT, self.FILE_XLSX)
-        self.CHINESE = re.compile(r'([\u4E00-\u9FA5]+|\w+)')
-        self.ENGLISH = re.compile(r'[a-z|A-Z]+')
-        self.__LANGUAGE = (self.CHINESE, self.ENGLISH)
+        self.LANG_CHINESE = re.compile(r'([\u4E00-\u9FA5]+|\w+)')
+        self.LANG_ENGLISH = re.compile(r'[a-z|A-Z]+')
+        self.__LANGUAGE = (self.LANG_CHINESE, self.LANG_ENGLISH)
         self.DataSet = None
         self.Label = None
         self.graph = None
@@ -171,26 +171,18 @@ class DataPreprocessing:
         assert os.path.exists(fileAbsolutePath)
         parseTree = et.parse(fileAbsolutePath)
         root = parseTree.getroot()
-
         rows = root.findall("Row")
-
         data = list()
         label = list()
         for row in rows:
             new_line = list()
             for element in row.findall("Value"):
                 new_line.append(data_form(element.text))
-
             if add_label:
-                label.append(data_form(row.find("Label")))
+                label.append(data_form(row.find("Label").text))
             data.append(new_line.copy())
-
-        self.DataSet = data_form(data)
-        if add_label:
-            self.Label = label
-
-
-
+        self.DataSet = set_form(data)
+        self.Label = label
 
     def readParagraph(self, path, add_label = False, sep ="\t"):
         if add_label:
@@ -268,7 +260,7 @@ class DataPreprocessing:
                     current.append(data_node)
                 if use_label:
                     label_node = et.Element("Label")
-                    label_node.text = self.Label[i]
+                    label_node.text = str(self.Label[i])
                     current.append(label_node)
                 root_node.append(current)
             formattedXML(root_node)
@@ -353,7 +345,7 @@ class DataPreprocessing:
         return testData
 
     def removeRedundantData(self):
-        if isinstance(self.DataSet, self.LIST):
+        if isinstance(self.DataSet, self.SETTYPE_LIST):
             raise TypeError("'list' object cannot do redundant")
         else:
             non_redundant = list()
@@ -432,9 +424,9 @@ class DataPreprocessing:
         else: self.DataSet = self.DataSet[totalRange]
 
     def __curWords(self, sentence, language, Filter):
-        if language is self.ENGLISH:
+        if language is self.LANG_ENGLISH:
             words = [item.lower() for item in re.findall(language, sentence)]
-        elif language is self.CHINESE:
+        elif language is self.LANG_CHINESE:
             return [word for word in jieba.cut(" ".join(re.findall(language, sentence)))
                        if word != " "]
         words = [item for item in words if Filter(item)]

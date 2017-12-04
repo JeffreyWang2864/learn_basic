@@ -6,7 +6,7 @@ demo = DataPreprocessing()
 demo.readParagraph("sushiReview.txt", True, '\t')
 demo.convertLevelToBool()
 demo.balanceDataSet()
-dictionary, wordMat = demo.wordBagging(demo.ENGLISH, demo.ND_ARRAY, lambda x: len(x) > 2)
+dictionary, wordMat = demo.wordBagging(demo.LANG_ENGLISH, demo.SETTYPE_NDARRAY, lambda x: len(x) > 2)
 
 model = classify.NaiveBayes()
 model.DataSet = wordMat
