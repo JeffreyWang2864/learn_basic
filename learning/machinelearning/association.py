@@ -1,6 +1,8 @@
 import os
 from learning.Helper import Util
 
+#TODO: fix API and formats
+
 class ItemSet:
     class combination(object):
         def __init__(self, newSet, newSupport, newFrequent):

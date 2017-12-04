@@ -34,5 +34,5 @@ def recommend(dataSet, user, simMethod, prediction_num = 3, toggle_print = False
 if __name__ == '__main__':
     demo = DataPreprocessing()
     demo.readSimpleDataSet("recommendation.txt", demo.ND_MAT, demo.INT, ", ")
-    result = recommend(demo.DataSet, 2, Util().COSINE_SIM, toggle_print=True)
+    result = recommend(demo.DataSet, 2, Util().SIM_COSINE, toggle_print=True)
     print(result)

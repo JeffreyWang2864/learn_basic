@@ -14,6 +14,7 @@ class Node:
         self.rightNode = right      #<class>Node, store right child
 
 class Regression:
+
     def __init__(self):
         self.DataSet = None             #np.mat, Data matrix
         self.Labels = None              #np.mat, correspond value of each data set
@@ -30,7 +31,8 @@ class Regression:
         self.STAGEWISE_REGRESSION = 2   #regression method
         self.TREE_BASED = 3             #regression method
         self.REG_METHOD = (self.RIDGE_REGRESSION, self.STAGEWISE_REGRESSION)
-    def ReadSimpleFile(self, path):
+
+    def readSimpleFile(self, path):
         """
         the function reads data from a .txt file. The file should follow the format:
             1) data sepa
@@ -54,14 +56,16 @@ class Regression:
             labelMat.append(float(splitLine[-1]))
         self.DataSet = np.array(dataMat)
         self.Labels = np.array(labelMat)
-    def GetFunction(self):
+
+    def getFunction(self):
         """
         Get alpha value and beta values
         :return: alpha value (float), beta values (list)
         """
         assert len(self.independentVar) == len(self.Betas)
         return self.Alpha, [self.independentVar, self.Betas]
-    def SeparateDataSet(self, testSize = 0.2, pattern = None):
+
+    def separateDataSet(self, testSize = 0.2, pattern = None):
         """
         The function separates data set to train data and test data. train data stores in the object.
         :param testSize: float in (0.0, 10.0), the portion of test data. default value is 0.2.
@@ -89,13 +93,14 @@ class Regression:
         if pattern is None:
             return np.array(testData), np.array(testLabel)
         else: return np.array(testData), np.array(testLabel), testIndex
-    def LinearRegression(self, features = None, mode = "DEFAULT", test_data = None, test_label = None):
+
+    def linearRegression(self, features = None, mode ="DEFAULT", test_data = None, test_label = None):
         assert (mode in ("DEFAULT", "LSE") or mode in self.REG_METHOD or mode == self.TREE_BASED)
                                                                 #LSE: Least Square Method
         if mode == "LSE":
             assert isinstance(features, int)
             assert features >= 0 and features < len(self.Title)
-            return self.__LeastSquareMethod(features)
+            return self.__leastSquareMethod(features)
         contain = list()
         if features is not None:
             assert isinstance(features, list) or isinstance(features, tuple)
@@ -121,9 +126,9 @@ class Regression:
         for i in range(xData.shape[1]):
             xMean.append(np.mean(xData[:, i]))
         if mode in self.REG_METHOD:
-            return self.__Shrinking(xData, xMean, test_data, test_label, mode)
+            return self.__shrinking(xData, xMean, test_data, test_label, mode)
         if mode == self.TREE_BASED:
-            return self.__TreeBasedRegression(xData)
+            return self.__treeBasedRegression(xData)
         betas = np.dot(np.linalg.inv(np.dot(np.transpose(xData), xData)),
                             np.dot(np.transpose(xData), np.mat(self.Labels).T))
         alpha = np.mean(np.mat(self.Labels))
@@ -131,15 +136,18 @@ class Regression:
             alpha -= xMean[i] * betas[i]
         self.Betas = [float(item) for item in betas]
         self.Alpha = float(alpha)
-    def __Shrinking(self, xData, xMean, testD, testL, mode):
-        def GetRidgeWeight(param = 0.2):
+
+    def __shrinking(self, xData, xMean, testD, testL, mode):
+
+        def getRidgeWeight(param = 0.2):
             xVector = xDifference.transpose() * xDifference
             xVector += np.eye(xDifference.shape[1]) * param
             if np.linalg.det(xVector) == 0.0:
                 print("singular matrix, cannot do inverse"); return
             weight = xVector.I * (xDifference.transpose() * yDifference.transpose())
             return weight
-        def GetStageWise(stepSize = 0.01, iterTime = 100):
+
+        def getStageWise(stepSize = 0.01, iterTime = 100):
             pass  #fix in future
         yMean = np.mat(np.repeat(np.mean(self.Labels), len(self.Labels)))
         yDifference = np.mat(self.Labels) - yMean
@@ -148,15 +156,15 @@ class Regression:
         weights = np.mat(np.zeros((self.ITER_NUM, xData.shape[1])))
         for i in range(self.ITER_NUM):
             if mode == self.RIDGE_REGRESSION:
-                weights[i, :] = GetRidgeWeight(np.exp(i-10)).transpose()
+                weights[i, :] = getRidgeWeight(np.exp(i - 10)).transpose()
             elif mode == self.STAGEWISE_REGRESSION:
-                weights[i, :] = GetStageWise().transpose()
+                weights[i, :] = getStageWise().transpose()
         #starts cross validation here
         bestWeight = weights[0]
         self.r_square = 0.0
         for weight in weights:
             self.Betas = weight
-            newR, predicted = self.SmartTest(testD, testL)
+            newR, predicted = self.smartTest(testD, testL)
             if newR < 0:
                 if newR < self.r_square:
                     self.r_square = newR
@@ -165,7 +173,8 @@ class Regression:
                 self.r_square = newR
                 bestWeight = weight
         self.Betas = bestWeight
-    def __LeastSquareMethod(self, feature):
+
+    def __leastSquareMethod(self, feature):
         xData = np.mat(self.DataSet[:, feature])
         xMean = np.mat(np.repeat(np.mean(xData), xData.shape[1]))
         yMean = np.mat(np.repeat(np.mean(self.Labels), len(self.Labels)))
@@ -175,11 +184,14 @@ class Regression:
         alpha = float(yMean[0, [0]]) - float(beta) * float(xMean[0, 0])
         self.Betas = [float(beta), ]
         self.Alpha = float(alpha)
-    def __TreeBasedRegression(self, data):
+
+    def __treeBasedRegression(self, data):
+
         def __splitbyValue(data, index, value):
             left = data[np.nonzero(data[:, index] > value)[0]]
             right = data[np.nonzero(data[:, index] <= value)[0]]
             return left, right
+
         def __chooseBestSplit(data):
             if len(set(data[:, -1].transpose().tolist()[0])) == 1:
                 return None, __leafModel(data)
@@ -202,6 +214,7 @@ class Regression:
             if left.shape[0] < self.MIN_NUM_DATA or right.shape[0] < self.MIN_NUM_DATA:
                 return None, __leafModel(data)
             return bestIndex, bestValue
+
         def __treeSpanning(data):
             index, value = __chooseBestSplit(data)
             tree = Node(index, value, None, None)
@@ -211,7 +224,8 @@ class Regression:
             tree.leftNode = __treeSpanning(leftData)
             tree.rightNode = __treeSpanning(rightData)
             return tree
-        def __LinearSolve(data):
+
+        def __linearSolve(data):
             vertical, horizontal = data.shape
             xData = np.mat(np.ones((vertical, horizontal)))
             yData = np.mat(np.ones((vertical, 1)))
@@ -220,11 +234,13 @@ class Regression:
             xVar = xData.transpose() * xData
             betas = xVar.I * (xData.transpose() * yData)
             return betas, xData, yData
+
         def __leafModel(data):
-            betas, x, y = __LinearSolve(data)
+            betas, x, y = __linearSolve(data)
             return betas
+
         def __treeModel(data):
-            betas, x, y = __LinearSolve(data)
+            betas, x, y = __linearSolve(data)
             predict = x * betas
             return sum(np.power(y - predict, 2))
         if self.Labels.ndim == 1:
@@ -233,7 +249,8 @@ class Regression:
         data = np.mat(np.concatenate((data, label.transpose()), axis=1))
         self.Tree = __treeSpanning(data)
         return
-    def Predict(self, inputs, add_weight = None):
+
+    def predict(self, inputs, add_weight = None):
         if self.Tree is not None:
             return self.__treeBasedPredict(inputs)
         if not isinstance(inputs, list) or isinstance(inputs, tuple):
@@ -260,18 +277,22 @@ class Regression:
             for i in range(len(inputs)):
                 predict += float(self.Betas[i]) * inputs[i]
         return predict
+
     def __treeBasedPredict(self, inputs):
+
         def regTreeEval(tree, inputs):
             horizontal = len(inputs)
             xData = np.mat(np.ones((1, horizontal+1)))
             xData[0, 1:horizontal+1] = inputs
             ret = xData * tree.Value
             return float(ret)
+
         def modelTreeEval(tree, inputs):
             horizontal = len(inputs)
             inputsVar = np.mat(np.ones((1, horizontal + 1)))
             inputsVar[:, 1:horizontal+1] = inputs
             return float(np.mat(np.repeat(tree.Value, horizontal + 1)) * inputsVar.transpose())
+
         def treePredict(tree, inputs):
             if tree.Index is None:
                 return regTreeEval(tree, inputs)
@@ -284,7 +305,8 @@ class Regression:
                     return treePredict(tree.rightNode, inputs)
                 else: return regTreeEval(tree.rightNode, inputs)
         return treePredict(self.Tree, inputs)
-    def SmartTest(self, testData, testLabel, toggle_print = False, weight = None):
+
+    def smartTest(self, testData, testLabel, toggle_print = False, weight = None):
         if isinstance(testData, list) or isinstance(testData, tuple):
             testData = np.array(testData)
         if isinstance(testLabel, list) or isinstance(testLabel, tuple):
@@ -293,7 +315,7 @@ class Regression:
         labelMean = np.mean(testLabel)
         predicts = list()
         for line in testData:
-            predicts.append(self.Predict(line, weight))
+            predicts.append(self.predict(line, weight))
         res, tot = float(), float()
         for i in range(len(predicts)):
             if toggle_print:
@@ -302,7 +324,8 @@ class Regression:
             tot += (testLabel[i] - labelMean) ** 2
         self.r_square = (1 - res / float(tot))
         return self.r_square, np.array(predicts)
-    def Graph(self, drawingFeature, labels = None, line = None):
+
+    def graph(self, drawingFeature, labels = None, line = None):
         assert isinstance(labels, list) or isinstance(labels, tuple)
         if line is not None:
             predictedValue = np.array(line[-1])
@@ -335,7 +358,8 @@ class Regression:
                 graph.set_ylabel(labels[1])
                 graph.set_zlabel(labels[2])
         plt.show()
-    def SaveGraph(self, name = None, path = None):
+
+    def saveGraph(self, name = None, path = None):
         if name is not None:
             assert isinstance(name, str)
         if path is not None:

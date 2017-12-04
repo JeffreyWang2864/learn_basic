@@ -6,6 +6,8 @@ import re
 from mpl_toolkits.mplot3d import Axes3D
 from learning.Helper import Util
 
+#TODO: fix API and formats
+
 class LogicRegression:
     def __init__(self):
         self.DataSet = None

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05af055d-8628-4757-aae7-1cac590477d6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/Helper.py" afterPath="$PROJECT_DIR$/learning/Helper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/examples/svm_example.py" afterPath="$PROJECT_DIR$/learning/examples/svm_example.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/examples/HousePricePrediction.py" afterPath="$PROJECT_DIR$/learning/examples/HousePricePrediction.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/examples/simple_recommendation_engine.py" afterPath="$PROJECT_DIR$/learning/examples/simple_recommendation_engine.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/machinelearning/association.py" afterPath="$PROJECT_DIR$/learning/machinelearning/association.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/machinelearning/classify.py" afterPath="$PROJECT_DIR$/learning/machinelearning/classify.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/machinelearning/clustering.py" afterPath="$PROJECT_DIR$/learning/machinelearning/clustering.py" />
@@ -25,22 +27,64 @@
       <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/learning/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+            <state relative-caret-position="63">
+              <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Helper.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/learning/Helper.py">
+      <file leaf-file-name="regression.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/learning/machinelearning/regression.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4052">
-              <caret line="330" column="30" lean-forward="false" selection-start-line="330" selection-start-column="30" selection-end-line="330" selection-end-column="30" />
+            <state relative-caret-position="441">
+              <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="association.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/learning/machinelearning/association.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="439">
+              <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-                <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classify.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/learning/machinelearning/classify.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clustering.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/learning/machinelearning/clustering.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Helper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/learning/Helper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="461" column="16" lean-forward="true" selection-start-line="461" selection-start-column="16" selection-end-line="461" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+                <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
               </folding>
             </state>
           </provider>
@@ -54,10 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/learning/machinelearning/association.py" />
-        <option value="$PROJECT_DIR$/learning/machinelearning/classify.py" />
-        <option value="$PROJECT_DIR$/learning/machinelearning/clustering.py" />
-        <option value="$PROJECT_DIR$/learning/machinelearning/regression.py" />
         <option value="$PROJECT_DIR$/learning/examples/apriori_example.py" />
         <option value="$PROJECT_DIR$/learning/examples/clustering_example.py" />
         <option value="$PROJECT_DIR$/learning/examples/data_preprocessing_example.py" />
@@ -71,6 +111,10 @@
         <option value="$PROJECT_DIR$/learning/deeplearning/networks.py" />
         <option value="$PROJECT_DIR$/learning/test.py" />
         <option value="$PROJECT_DIR$/learning/Helper.py" />
+        <option value="$PROJECT_DIR$/learning/machinelearning/regression.py" />
+        <option value="$PROJECT_DIR$/learning/machinelearning/association.py" />
+        <option value="$PROJECT_DIR$/learning/machinelearning/classify.py" />
+        <option value="$PROJECT_DIR$/learning/machinelearning/clustering.py" />
       </list>
     </option>
   </component>
@@ -113,8 +157,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -197,10 +239,12 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -327,10 +371,10 @@
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21459228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18669528" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -338,7 +382,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29808918" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -359,6 +403,46 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/learning/test.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/Helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4290">
+          <caret line="165" column="23" lean-forward="false" selection-start-line="165" selection-start-column="23" selection-end-line="165" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/Helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3696">
+          <caret line="168" column="1" lean-forward="true" selection-start-line="168" selection-start-column="1" selection-end-line="168" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/test.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
           <folding />
@@ -371,8 +455,8 @@
           <caret line="131" column="32" lean-forward="true" selection-start-line="131" selection-start-column="32" selection-end-line="131" selection-end-column="32" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -391,8 +475,8 @@
           <caret line="158" column="37" lean-forward="true" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -411,8 +495,8 @@
           <caret line="428" column="30" lean-forward="true" selection-start-line="428" selection-start-column="30" selection-end-line="428" selection-end-column="30" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -431,8 +515,8 @@
           <caret line="157" column="37" lean-forward="true" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -451,8 +535,8 @@
           <caret line="128" column="30" lean-forward="false" selection-start-line="128" selection-start-column="30" selection-end-line="128" selection-end-column="30" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -471,8 +555,8 @@
           <caret line="316" column="33" lean-forward="true" selection-start-line="316" selection-start-column="33" selection-end-line="316" selection-end-column="33" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -491,8 +575,8 @@
           <caret line="312" column="12" lean-forward="true" selection-start-line="312" selection-start-column="12" selection-end-line="312" selection-end-column="12" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -511,8 +595,8 @@
           <caret line="274" column="43" lean-forward="true" selection-start-line="274" selection-start-column="43" selection-end-line="274" selection-end-column="43" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
         </state>
       </provider>
@@ -531,30 +615,9 @@
           <caret line="0" column="9" lean-forward="true" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/learning/machinelearning/classify.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/learning/machinelearning/clustering.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="5" lean-forward="false" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/learning/machinelearning/regression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -645,31 +708,58 @@
     <entry file="file://$PROJECT_DIR$/learning/export.txt" />
     <entry file="file://$PROJECT_DIR$/learning/export.xml" />
     <entry file="file://$PROJECT_DIR$/learning/export.html" />
-    <entry file="file://$PROJECT_DIR$/learning/machinelearning/association.py">
+    <entry file="file://$PROJECT_DIR$/learning/export.json" />
+    <entry file="file://$PROJECT_DIR$/learning/Helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1374">
-          <caret line="133" column="22" lean-forward="true" selection-start-line="133" selection-start-column="22" selection-end-line="133" selection-end-column="22" />
+        <state relative-caret-position="384">
+          <caret line="461" column="16" lean-forward="true" selection-start-line="461" selection-start-column="16" selection-end-line="461" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1512400857233" expanded="true" signature="2190:2249" ph="..." />
+            <marker date="1512400857233" expanded="true" signature="6617:11268" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/learning/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        <state relative-caret-position="63">
+          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/learning/export.json" />
-    <entry file="file://$PROJECT_DIR$/learning/Helper.py">
+    <entry file="file://$PROJECT_DIR$/learning/machinelearning/regression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4052">
-          <caret line="330" column="30" lean-forward="false" selection-start-line="330" selection-start-column="30" selection-end-line="330" selection-end-column="30" />
+        <state relative-caret-position="441">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/machinelearning/association.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1512398301350" expanded="true" signature="2181:2240" ph="..." />
-            <marker date="1512398301350" expanded="true" signature="6599:11243" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/machinelearning/classify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning/machinelearning/clustering.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

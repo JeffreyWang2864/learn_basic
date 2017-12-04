@@ -4,9 +4,12 @@ from matplotlib import pyplot as plt
 import re
 import jieba
 
+
 class Util:
+
     def __init__(self):
         self.SeparateDataSet_Pattern = None
+
     def selectRandomItem(self, current, target):
         if isinstance(current, int):
             new = current
@@ -18,21 +21,26 @@ class Util:
             while new in current:
                 new = int(np.random.uniform(0, target))
             return new
+
     def clipStepSize(self, max, target, min):
         if target > max:
             return max
         if min > target:
             return min
         return target
-    def EUCLID_SIM(self, d1, d2):
+
+    def SIM_EUCLID(self, d1, d2):
         return 1.0 / (1.0 + np.linalg.norm(d1 - d2))
-    def PEARSON_SIM(self, d1, d2):
+
+    def SIM_PEARSON(self, d1, d2):
         if len(d1) < 3: return 1.0
         return 0.5 + 0.5 * np.corrcoef(d1, d2, rowvar=0)[0][1]
-    def COSINE_SIM(self, d1, d2):
+
+    def SIM_COSINE(self, d1, d2):
         num = float(d1.transpose() * d2)
         denom = np.linalg.norm(d1) * np.linalg.norm(d2)
         return 0.5 + 0.5 * (num / denom)
+
     def splitDataSet(self, DataLen, test_proportion = 0.2, mode ="DEFAULT"):
         """
         mode --- decides the way function operates with your input data
@@ -55,8 +63,10 @@ class Util:
             if mode == "SAVE":
                 self.SeparateDataSet_Pattern = Tabel
             return Tabel
+
     def getDirectory(self):
         return (os.path.dirname(os.path.abspath(__file__)) + "/")
+
     def plotCurveROC(self, DataLabel, PredictLabel):
         if isinstance(DataLabel, list):
             DataLabel = np.array(DataLabel)
@@ -87,7 +97,9 @@ class Util:
         print("the area covers %.2f%% of area" % ((HorizontalSum * x_step) * 100))
         plt.show()
 
+
 class DataPreprocessing:
+
     def __init__(self):
         self.LIST = list
         self.ND_ARRAY = np.array
@@ -111,8 +123,10 @@ class DataPreprocessing:
         self.Label = None
         self.graph = None
         self.ExtraData = None
+
     def __initGraph(self):
         self.graph = plt.figure()
+
     def __validPath(self, path):
         assert isinstance(path, str)
         if path[-4::] != ".txt":
@@ -121,6 +135,7 @@ class DataPreprocessing:
             print("File does not exist: %s" % path)
             return False
         return True
+
     def readSimpleDataSet(self, path, set_form, data_form, sep ="\t", add_title = False, add_label = False):
         assert set_form in self.__SET_FORMAT
         assert data_form in self.__DATA_FORMAT
@@ -145,9 +160,11 @@ class DataPreprocessing:
         print("read file successful")
         self.DataSet = set_form(data)
         self.Label = set_form(self.Label)
+
     def readXML(self, path, add_label = False):
         assert isinstance(path, str)
         assert os.path.exists(Util().getDirectory() + path + ".xml")
+
     def readParagraph(self, path, add_label = False, sep ="\t"):
         if add_label:
             self.Label = list()
@@ -161,6 +178,7 @@ class DataPreprocessing:
                     tempData = line.strip().split(sep)
                     self.Label.append(int(tempData.pop()))
                 self.DataSet.append(tempData[0])
+
     def writeDataSet(self, name, form, use_label = True):
         assert form in self.__FILE_FORMAT
         def writeTXT():
@@ -174,6 +192,7 @@ class DataPreprocessing:
                 file.write("\n")
             file.close()
             return 1
+
         def writeCSV():
             import csv
             writer = csv.writer(open(Util().getDirectory() + name + '.csv', 'wb'))
@@ -192,6 +211,7 @@ class DataPreprocessing:
                 else: writer.writerows(self.DataSet)
             writer.dialect()
             return 1
+
         def writeJSON():
             import json
             writer = open(Util().getDirectory() + name + ".json", 'wb')
@@ -203,6 +223,7 @@ class DataPreprocessing:
             else: contents = json.dumps(data)
             json.dump(contents, writer)
             return 1
+
         def writeXML():
             from xml.etree import ElementTree as et
             root_node = et.Element("Table")
@@ -220,6 +241,7 @@ class DataPreprocessing:
             tree = et.ElementTree(root_node)
             tree.write(Util().getDirectory() + name + ".xml")
             return 1
+
         def writeXLSX():
             import xlwt
             wbook = xlwt.Workbook()
@@ -232,6 +254,7 @@ class DataPreprocessing:
                                  xlwt.easyxf('align: vertical center, horizontal center'))
             wbook.save(Util().getDirectory() + name + ".xls")
             return 1
+
         def writeHTML():
             file = open(Util().getDirectory() + name + ".html", "w")
             file.write("<!DOCTYPE HTML>\n")
@@ -257,8 +280,10 @@ class DataPreprocessing:
             file.write("</html>")
             file.close()
             return 1
+
         def writeFileError():
             raise TypeError("unable to write the file")
+
         return {
             self.FILE_TXT : writeTXT,
             self.FILE_CSV : writeCSV,
@@ -267,6 +292,7 @@ class DataPreprocessing:
             self.FILE_XLSX : writeXLSX,
             self.FILE_HTML : writeHTML
         }.get(form, writeFileError)()
+
     def separateDataSet(self, set_form, portion = 0.2, mode = "DEFAULT"):
         assert set_form in self.__SET_FORMAT
         assert self.DataSet is not None
@@ -291,6 +317,7 @@ class DataPreprocessing:
             self.Label = set_form(trainLabel)
             return set_form(testData), set_form(testLabel)
         return testData
+
     def removeRedundantData(self):
         if isinstance(self.DataSet, self.LIST):
             raise TypeError("'list' object cannot do redundant")
@@ -306,6 +333,7 @@ class DataPreprocessing:
         if self.Label is not None:
             assert not isinstance(self.Label, list)
             self.Label = self.Label[non_redundant]
+
     def balanceDataSet(self, ratio = (0.5, 0.5)):
         assert self.DataSet is not None
         assert self.Label is not None
@@ -346,7 +374,7 @@ class DataPreprocessing:
             self.DataSet = new
         else: self.DataSet = self.DataSet[totalRange]
         self.Label = self.Label[totalRange]
-        pass
+
     def convertLevelToBool(self):
         assert self.DataSet is not None
         assert self.Label is not None
@@ -368,6 +396,7 @@ class DataPreprocessing:
                 new.append(self.DataSet[item])
             self.DataSet = new
         else: self.DataSet = self.DataSet[totalRange]
+
     def __curWords(self, sentence, language, Filter):
         if language is self.ENGLISH:
             words = [item.lower() for item in re.findall(language, sentence)]
@@ -376,11 +405,13 @@ class DataPreprocessing:
                        if word != " "]
         words = [item for item in words if Filter(item)]
         return words
+
     def __generateDictionary(self, sentences):
         ret = set()
         for sentence in sentences:
             ret = ret | set(sentence)
         return list(ret)
+
     def __getWordExistence(self, line, dictionary):
         ret = [0] * len(dictionary)
         for word in line:
@@ -389,6 +420,7 @@ class DataPreprocessing:
             else:
                 print("The word %s does not contain in the dictionary" % (word))
         return ret
+
     def wordBagging(self, language, set_form, Filter = lambda x: True):
         assert set_form in self.__SET_FORMAT
         assert language in self.__LANGUAGE
@@ -400,10 +432,13 @@ class DataPreprocessing:
         for line in lineList:
             dictMat.append(self.__getWordExistence(line, dictionary))
         return dictionary, set_form(dictMat)
+
     def head(self, value = 10):
         return self.DataSet[::value]
+
     def tail(self, value = 10):
         return self.DataSet[-value::]
+
     def pca(self, dimension):
         assert isinstance(dimension, int) and 0 < dimension <= self.DataSet.shape[1]
         meanValue = np.mean(self.DataSet, axis=0)
@@ -416,6 +451,7 @@ class DataPreprocessing:
         reconData = (lowData * finalEigVectors.transpose()) + meanValue
         self.DataSet = reconData
         return lowData
+
     def graph2D(self, graphingIndexes = None, color ="#516EFF"):
         if graphingIndexes is None:
             x = np.array(self.DataSet[:, 0]).flatten()
@@ -430,5 +466,6 @@ class DataPreprocessing:
             self.__initGraph()
         graph = self.graph.add_subplot(111)
         graph.scatter(x, y, marker='o', c=color, s=20, alpha=0.2)
+
     def showGraph(self):
         plt.show()

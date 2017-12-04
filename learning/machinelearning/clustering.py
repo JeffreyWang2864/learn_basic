@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import os
 from learning.Helper import Util
 
+#TODO: fix API and formats
+
 class Clustering:
     def __init__(self):
         self.DataSet = None

@@ -14,14 +14,14 @@ model.DataSet = rawData
 model.Labels = label
 model.Title = title
 
-testData, testLabel = model.SeparateDataSet()
+testData, testLabel = model.separateDataSet()
 
 sortedIndex = testLabel.argsort()
 newD = np.vstack([testData[i] for i in sortedIndex])
 newL = np.array([testLabel[i] for i in sortedIndex])
 
-model.LinearRegression(mode="DEFAULT")
-r_square, predictedData = model.SmartTest(newD, newL, toggle_print=True, weight=2.5)
+model.linearRegression(mode="DEFAULT")
+r_square, predictedData = model.smartTest(newD, newL, toggle_print=True, weight=2.5)
 
 print("R Square: %.6f"%r_square)
-model.Graph(0, labels=('x', 'y'), line=[newD[:, [0, ]], predictedData])
+model.graph(0, labels=('x', 'y'), line=[newD[:, [0, ]], predictedData])
