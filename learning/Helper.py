@@ -3,7 +3,11 @@ import numpy as np
 from matplotlib import pyplot as plt
 import re
 import jieba
-
+import json
+from xml.etree import ElementTree as et
+import json
+import csv
+import xlwt
 
 class Util:
 
@@ -131,7 +135,7 @@ class DataPreprocessing:
         assert isinstance(path, str)
         if path[-4::] != ".txt":
             raise TypeError("Read file only support .txt format!")
-        if not os.path.exists(Util().getDirectory() + "/DATA/" + path):
+        if not os.path.exists(Util().getDirectory() + "DATA/" + path):
             print("File does not exist: %s" % path)
             return False
         return True
@@ -142,7 +146,7 @@ class DataPreprocessing:
         assert isinstance(add_title, bool)
         assert isinstance(add_label, bool)
         assert self.__validPath(path)
-        file = open(Util().getDirectory() + "/DATA/" + path, "r")
+        file = open(Util().getDirectory() + "DATA/" + path, "r")
         data = list()
         lines = file.readlines()
         if add_label:
@@ -161,15 +165,38 @@ class DataPreprocessing:
         self.DataSet = set_form(data)
         self.Label = set_form(self.Label)
 
-    def readXML(self, path, add_label = False):
+    def readXML(self, path, set_form, data_form, add_label = False):
         assert isinstance(path, str)
-        assert os.path.exists(Util().getDirectory() + path + ".xml")
+        fileAbsolutePath = Util().getDirectory() + "DATA/" + path + ".xml"
+        assert os.path.exists(fileAbsolutePath)
+        parseTree = et.parse(fileAbsolutePath)
+        root = parseTree.getroot()
+
+        rows = root.findall("Row")
+
+        data = list()
+        label = list()
+        for row in rows:
+            new_line = list()
+            for element in row.findall("Value"):
+                new_line.append(data_form(element.text))
+
+            if add_label:
+                label.append(data_form(row.find("Label")))
+            data.append(new_line.copy())
+
+        self.DataSet = data_form(data)
+        if add_label:
+            self.Label = label
+
+
+
 
     def readParagraph(self, path, add_label = False, sep ="\t"):
         if add_label:
             self.Label = list()
         assert self.__validPath(path)
-        file = open(Util().getDirectory() + "/DATA/" + path, "r")
+        file = open(Util().getDirectory() + "DATA/" + path, "r")
         self.DataSet = list()
         lines = file.readlines()
         for line in lines:
@@ -179,10 +206,10 @@ class DataPreprocessing:
                     self.Label.append(int(tempData.pop()))
                 self.DataSet.append(tempData[0])
 
-    def writeDataSet(self, name, form, use_label = True):
-        assert form in self.__FILE_FORMAT
+    def writeDataSet(self, name, form, use_label = False):
+
         def writeTXT():
-            file = open(Util().getDirectory() + name + ".txt", 'w')
+            file = open(Util().getDirectory() + "DATA/" + name + ".txt", 'w')
             for i in range(len(self.DataSet)):
                 for item in self.DataSet[i]:
                     file.write(str(item))
@@ -194,8 +221,7 @@ class DataPreprocessing:
             return 1
 
         def writeCSV():
-            import csv
-            writer = csv.writer(open(Util().getDirectory() + name + '.csv', 'wb'))
+            writer = csv.writer(open(Util().getDirectory() + "DATA/" + name + '.csv', 'wb'))
             if not isinstance(self.DataSet, list):
                 if use_label:
                     temp = np.vstack((self.DataSet.T, self.Label.T))
@@ -213,8 +239,7 @@ class DataPreprocessing:
             return 1
 
         def writeJSON():
-            import json
-            writer = open(Util().getDirectory() + name + ".json", 'wb')
+            writer = open(Util().getDirectory() + "DATA/" + name + ".json", 'wb')
             if isinstance(self.DataSet, (np.ndarray, np.generic)):
                 data = self.DataSet.tolist()
             else: data = self.DataSet
@@ -225,12 +250,20 @@ class DataPreprocessing:
             return 1
 
         def writeXML():
-            from xml.etree import ElementTree as et
+
+            def formattedXML(e, level = 0):
+                if len(e) > 0:
+                    e.text = "\n" + "\t" * (level + 1)
+                    for child in e:
+                        formattedXML(child, level+1)
+                    child.tail = child.tail[:-1]
+                e.tail = "\n" + "\t" * level
+
             root_node = et.Element("Table")
             for i in range(len(self.DataSet)):
                 current = et.Element("Row")
                 for j in range(len(self.DataSet[i])):
-                    data_node = et.Element(str(j))
+                    data_node = et.Element("Value")
                     data_node.text = str(self.DataSet[i][j])
                     current.append(data_node)
                 if use_label:
@@ -238,12 +271,12 @@ class DataPreprocessing:
                     label_node.text = self.Label[i]
                     current.append(label_node)
                 root_node.append(current)
+            formattedXML(root_node)
             tree = et.ElementTree(root_node)
-            tree.write(Util().getDirectory() + name + ".xml")
+            tree.write(Util().getDirectory() + "DATA/" + name + ".xml")
             return 1
 
         def writeXLSX():
-            import xlwt
             wbook = xlwt.Workbook()
             wsheet = wbook.add_sheet("sheet 1")
             for i in range(len(self.DataSet)):
@@ -252,11 +285,11 @@ class DataPreprocessing:
                 if use_label:
                     wsheet.write(i, len(self.DataSet[i]), self.Label[i],
                                  xlwt.easyxf('align: vertical center, horizontal center'))
-            wbook.save(Util().getDirectory() + name + ".xls")
+            wbook.save(Util().getDirectory() + "DATA/" + name + ".xls")
             return 1
 
         def writeHTML():
-            file = open(Util().getDirectory() + name + ".html", "w")
+            file = open(Util().getDirectory() + "DATA/" + name + ".html", "w")
             file.write("<!DOCTYPE HTML>\n")
             file.write("<html>\n")
             file.write("\t<head>\n")
@@ -284,6 +317,7 @@ class DataPreprocessing:
         def writeFileError():
             raise TypeError("unable to write the file")
 
+        assert form in self.__FILE_FORMAT
         return {
             self.FILE_TXT : writeTXT,
             self.FILE_CSV : writeCSV,
