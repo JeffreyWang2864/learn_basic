@@ -15,4 +15,4 @@ for i in range(len(test_data)):
     print(res)
     predicted.append(res[1])        #append the predicted value
 demo.GraphPoints()              #graph
-Util().plot_ROC_curve(test_label, predicted)      #graph roc curve
+Util().plotCurveROC(test_label, predicted)      #graph roc curve

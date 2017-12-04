@@ -19,7 +19,7 @@ class Clustering:
     def readSimpleFile(self, path):
         assert isinstance(path, str)
         data = list()
-        fr = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        fr = open(Util().getDirectory() + "/DATA/" + path, 'r')
         lines = fr.readlines()
         for line in lines:
             tempLine = list()

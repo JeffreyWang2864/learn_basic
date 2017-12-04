@@ -7,7 +7,7 @@ import jieba
 class Util:
     def __init__(self):
         self.SeparateDataSet_Pattern = None
-    def SelectRandomItem(self, current, target):
+    def selectRandomItem(self, current, target):
         if isinstance(current, int):
             new = current
             while new == current:
@@ -18,7 +18,7 @@ class Util:
             while new in current:
                 new = int(np.random.uniform(0, target))
             return new
-    def ClipStepSize(self, max, target, min):
+    def clipStepSize(self, max, target, min):
         if target > max:
             return max
         if min > target:
@@ -33,7 +33,7 @@ class Util:
         num = float(d1.transpose() * d2)
         denom = np.linalg.norm(d1) * np.linalg.norm(d2)
         return 0.5 + 0.5 * (num / denom)
-    def SplitDataSet(self, DataLen, test_proportion = 0.2, mode ="DEFAULT"):
+    def splitDataSet(self, DataLen, test_proportion = 0.2, mode ="DEFAULT"):
         """
         mode --- decides the way function operates with your input data
             DEFAULT --- just split the data randomly
@@ -49,15 +49,15 @@ class Util:
             ExistedElements = list()
             Tabel = [0] * DataLen
             for i in range(length_test):
-                index = self.SelectRandomItem(ExistedElements, DataLen)
+                index = self.selectRandomItem(ExistedElements, DataLen)
                 Tabel[index] += 1
                 ExistedElements.append(index)
             if mode == "SAVE":
                 self.SeparateDataSet_Pattern = Tabel
             return Tabel
-    def GetDirectory(self):
+    def getDirectory(self):
         return (os.path.dirname(os.path.abspath(__file__)) + "/")
-    def plot_ROC_curve(self, DataLabel, PredictLabel):
+    def plotCurveROC(self, DataLabel, PredictLabel):
         if isinstance(DataLabel, list):
             DataLabel = np.array(DataLabel)
         if isinstance(PredictLabel, list):
@@ -117,7 +117,7 @@ class DataPreprocessing:
         assert isinstance(path, str)
         if path[-4::] != ".txt":
             raise TypeError("Read file only support .txt format!")
-        if not os.path.exists(Util().GetDirectory() + "/DATA/" + path):
+        if not os.path.exists(Util().getDirectory() + "/DATA/" + path):
             print("File does not exist: %s" % path)
             return False
         return True
@@ -127,7 +127,7 @@ class DataPreprocessing:
         assert isinstance(add_title, bool)
         assert isinstance(add_label, bool)
         assert self.__validPath(path)
-        file = open(Util().GetDirectory() + "/DATA/" + path, "r")
+        file = open(Util().getDirectory() + "/DATA/" + path, "r")
         data = list()
         lines = file.readlines()
         if add_label:
@@ -147,12 +147,12 @@ class DataPreprocessing:
         self.Label = set_form(self.Label)
     def readXML(self, path, add_label = False):
         assert isinstance(path, str)
-        assert os.path.exists(Util().GetDirectory() + path + ".xml")
+        assert os.path.exists(Util().getDirectory() + path + ".xml")
     def readParagraph(self, path, add_label = False, sep ="\t"):
         if add_label:
             self.Label = list()
         assert self.__validPath(path)
-        file = open(Util().GetDirectory() + "/DATA/" + path, "r")
+        file = open(Util().getDirectory() + "/DATA/" + path, "r")
         self.DataSet = list()
         lines = file.readlines()
         for line in lines:
@@ -164,7 +164,7 @@ class DataPreprocessing:
     def writeDataSet(self, name, form, use_label = True):
         assert form in self.__FILE_FORMAT
         def writeTXT():
-            file = open(Util().GetDirectory() + name + ".txt", 'w')
+            file = open(Util().getDirectory() + name + ".txt", 'w')
             for i in range(len(self.DataSet)):
                 for item in self.DataSet[i]:
                     file.write(str(item))
@@ -176,7 +176,7 @@ class DataPreprocessing:
             return 1
         def writeCSV():
             import csv
-            writer = csv.writer(open(Util().GetDirectory() + name + '.csv', 'wb'))
+            writer = csv.writer(open(Util().getDirectory() + name + '.csv', 'wb'))
             if not isinstance(self.DataSet, list):
                 if use_label:
                     temp = np.vstack((self.DataSet.T, self.Label.T))
@@ -194,7 +194,7 @@ class DataPreprocessing:
             return 1
         def writeJSON():
             import json
-            writer = open(Util().GetDirectory() + name + ".json", 'wb')
+            writer = open(Util().getDirectory() + name + ".json", 'wb')
             if isinstance(self.DataSet, (np.ndarray, np.generic)):
                 data = self.DataSet.tolist()
             else: data = self.DataSet
@@ -218,7 +218,7 @@ class DataPreprocessing:
                     current.append(label_node)
                 root_node.append(current)
             tree = et.ElementTree(root_node)
-            tree.write(Util().GetDirectory() + name + ".xml")
+            tree.write(Util().getDirectory() + name + ".xml")
             return 1
         def writeXLSX():
             import xlwt
@@ -230,10 +230,10 @@ class DataPreprocessing:
                 if use_label:
                     wsheet.write(i, len(self.DataSet[i]), self.Label[i],
                                  xlwt.easyxf('align: vertical center, horizontal center'))
-            wbook.save(Util().GetDirectory() + name + ".xls")
+            wbook.save(Util().getDirectory() + name + ".xls")
             return 1
         def writeHTML():
-            file = open(Util().GetDirectory() + name + ".html", "w")
+            file = open(Util().getDirectory() + name + ".html", "w")
             file.write("<!DOCTYPE HTML>\n")
             file.write("<html>\n")
             file.write("\t<head>\n")
@@ -276,7 +276,7 @@ class DataPreprocessing:
         if self.Label is not None:
             trainLabel, testLabel = list(), list()
         trainData, testData = list(), list()
-        Lookup_Table = Util().SplitDataSet(len(self.DataSet), portion, mode)
+        Lookup_Table = Util().splitDataSet(len(self.DataSet), portion, mode)
         for i in range(len(Lookup_Table)):
             if Lookup_Table[i] == 0:
                 trainData.append(self.DataSet[i])

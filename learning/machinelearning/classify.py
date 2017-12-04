@@ -16,7 +16,7 @@ class LogicRegression:
         return (1.0 / (1 + np.exp(-target)))
     def ReadSimpleFile(self, path):
         dataMat = []; labelMat = []
-        fr = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        fr = open(Util().getDirectory() + "/DATA/" + path, 'r')
         for line in fr.readlines():
             lineArr = line.strip().split()
             tempLine = list()
@@ -32,7 +32,7 @@ class LogicRegression:
         TrainData, TestData, TrainLabel, TestLabel = list(), list(), list(), list()
         if Pattern is not None:
             Lookup_Table = Pattern
-        else: Lookup_Table = Util().SplitDataSet(len(self.DataSet), TestSize)
+        else: Lookup_Table = Util().splitDataSet(len(self.DataSet), TestSize)
         test_index = list()
         for i in range(len(Lookup_Table)):
             if Lookup_Table[i] == 0:
@@ -146,7 +146,7 @@ class LogicRegression:
             print(result)
             PredictedLabel.append(result[1])
         assert len(PredictedLabel) == len(TestLabel)
-        Util().plot_ROC_curve(TestLabel, PredictedLabel)
+        Util().plotCurveROC(TestLabel, PredictedLabel)
 
 class DecisionTree:
     def __init__(self, TreeName = "Node"):
@@ -164,7 +164,7 @@ class DecisionTree:
     def ReadSimpleFile(self, path):
         dataMat, labelMat = list(), list()
         isinstance(path, str)
-        fr = open(Util().GetDirectory() + "/DATA/" + path, "r")
+        fr = open(Util().getDirectory() + "/DATA/" + path, "r")
         lines = fr.readlines()
         self.Labels = lines.pop(0).strip().split()
         typeid = lines.pop(0).strip().split()
@@ -186,7 +186,7 @@ class DecisionTree:
         assert testSize < 1.0
         if pattern is not None:
             lookeup_table = pattern
-        else: lookeup_table = Util().SplitDataSet(len(self.DataSet), testSize)
+        else: lookeup_table = Util().splitDataSet(len(self.DataSet), testSize)
         trainData, testData = list(), list()
         testIndex = list()
         for i in range(len(lookeup_table)):
@@ -334,7 +334,7 @@ class SupportVectorMachine:
     def SeparateDataSet(self, TestSize = 0.2, mode = "DEFAULT"):
         assert mode in ("LOAD", "SAVE", "DEFAULT")
         TrainData, TrainLabel, TestData, TestLabel = list(), list(), list(), list()
-        Lookup_Table = Util().SplitDataSet(len(self.DataSet), TestSize, mode)
+        Lookup_Table = Util().splitDataSet(len(self.DataSet), TestSize, mode)
         for i in range(len(Lookup_Table)):
             if Lookup_Table[i] == 0:
                 TrainData.append(self.DataSet[i])
@@ -375,10 +375,10 @@ class SupportVectorMachine:
         if path[-4::] != '.txt':
             print('Read file only support txt format')
             return None
-        if not os.path.exists(Util().GetDirectory() + "/DATA/" + path):
+        if not os.path.exists(Util().getDirectory() + "/DATA/" + path):
             print('File does not exist: %s' % (path))
             return None
-        file = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        file = open(Util().getDirectory() + "/DATA/" + path, 'r')
         try:
             lines = file.readlines()
             RawData, DataSet, Labels = None, [], []
@@ -405,7 +405,7 @@ class SupportVectorMachine:
             return calc_j - float(LabelMat[j])
         def SelectBestPair(i, error_i):
             if capacity != "ENABLED":
-                ret = Util().SelectRandomItem(i, vertical)
+                ret = Util().selectRandomItem(i, vertical)
                 return ret, CalculateError(ret)
             else:
                 assert self.ErrorsStorage.shape
@@ -424,7 +424,7 @@ class SupportVectorMachine:
                             error_best = error_item
                     return best, error_best
                 else:
-                    ret = Util().SelectRandomItem(i, vertical)
+                    ret = Util().selectRandomItem(i, vertical)
                     return ret, CalculateError(ret)
         def Train(i):
             nonlocal constant
@@ -449,7 +449,7 @@ class SupportVectorMachine:
                     print("BC2: eta >= 0, i: %d, j: %d"%(i, j))
                     return 0
                 betas[j] -= LabelMat[j] * (i_error - j_error)/eta
-                betas[j] = Util().ClipStepSize(max_difference, betas[j], min_difference)
+                betas[j] = Util().clipStepSize(max_difference, betas[j], min_difference)
                 if capacity == "ENABLED":
                     CalculateError(j, True)
                 if np.abs(betas[j] - j_old) < pow(10, -5):      #第三个运算结束条件判断
@@ -593,9 +593,9 @@ class NaiveBayes:
         assert isinstance(path, str)
         if path[-4::] != '.txt':
             print('Read file only support txt format'); return None
-        if not os.path.exists(Util().GetDirectory() + "/DATA/" + path):
+        if not os.path.exists(Util().getDirectory() + "/DATA/" + path):
             print('File does not exist: %s'%(path)); return None
-        file = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        file = open(Util().getDirectory() + "/DATA/" + path, 'r')
         try:
             Contents, Labels = list(), list()
             lines = file.readlines()
@@ -616,7 +616,7 @@ class NaiveBayes:
     def SeparateDataSet(self, TestSize = 0.2, mode = "DEFAULT", if_return = False):
         assert mode in ("LOAD", "SAVE", "DEFAULT")
         TrainData, TrainLabel, TestData, TestLabel = list(), list(), list(), list()
-        Lookup_Table = Util().SplitDataSet(len(self.DataSet), TestSize, mode)
+        Lookup_Table = Util().splitDataSet(len(self.DataSet), TestSize, mode)
         for i in range(len(Lookup_Table)):
             if Lookup_Table[i] == 0:
                 TrainData.append(self.DataSet[i])
@@ -739,10 +739,10 @@ class knn:
         if path[-4::] != '.txt':
             print('Read file only support txt format')
             return None
-        if not os.path.exists(Util().GetDirectory() + "/DATA/" + path):
+        if not os.path.exists(Util().getDirectory() + "/DATA/" + path):
             print('File does not exist: %s' % (path))
             return None
-        file = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        file = open(Util().getDirectory() + "/DATA/" + path, 'r')
         try:
             lines = file.readlines()
             RawData, DataSet, Labels = None, list(), list()
@@ -765,7 +765,7 @@ class knn:
     def SeparateDataSet(self, TestSize = 0.2, mode = "DEFAULT"):
         assert mode in ("LOAD", "SAVE", "DEFAULT")
         TrainData, TrainLabel, TestData, TestLabel = list(), list(), list(), list()
-        Lookup_Table = Util().SplitDataSet(len(self.DataSet), TestSize, mode)
+        Lookup_Table = Util().splitDataSet(len(self.DataSet), TestSize, mode)
         for i in range(len(Lookup_Table)):
             if Lookup_Table[i] == 0:
                 TrainData.append(self.DataSet[i])

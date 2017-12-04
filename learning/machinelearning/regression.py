@@ -39,7 +39,7 @@ class Regression:
         """
         assert isinstance(path, str)
         dataMat, labelMat = list(), list()
-        fr = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        fr = open(Util().getDirectory() + "/DATA/" + path, 'r')
         lines = fr.readlines()
         self.Title = lines.pop(0).strip().split(" ")
         for line in lines:
@@ -71,7 +71,7 @@ class Regression:
         """
         assert testSize < 1.0 and testSize > 0.0
         if pattern is None:
-            lookeup_table = Util().SplitDataSet(self.DataSet.shape[0], testSize)  #get flag of splitting index
+            lookeup_table = Util().splitDataSet(self.DataSet.shape[0], testSize)  #get flag of splitting index
         else: lookeup_table = pattern
         trainData, trainLabel, testData, testLabel = list(), list(), list(), list()
         testIndex = list()
@@ -340,6 +340,6 @@ class Regression:
             assert isinstance(name, str)
         if path is not None:
             assert isinstance(path, str)
-        try: plt.savefig(Util().GetDirectory() + "/DATA/save/" + path)
-        except: print("Invalid Directory: %s" % Util().GetDirectory() + "/DATA/save/" + path)
-        else: print("file saved to: %s" % Util().GetDirectory() + "/DATA/save/" + path)
+        try: plt.savefig(Util().getDirectory() + "/DATA/save/" + path)
+        except: print("Invalid Directory: %s" % Util().getDirectory() + "/DATA/save/" + path)
+        else: print("file saved to: %s" % Util().getDirectory() + "/DATA/save/" + path)

@@ -49,10 +49,10 @@ class Apriori:
         if path[-4::] != ".txt":
             print("Read file only support txt format")
             return None
-        if not os.path.exists(Util().GetDirectory() + "/DATA/" + path):
+        if not os.path.exists(Util().getDirectory() + "/DATA/" + path):
             print('File does not exist: %s' % (path))
             return None
-        file = open(Util().GetDirectory() + "/DATA/" + path, 'r')
+        file = open(Util().getDirectory() + "/DATA/" + path, 'r')
         lines = file.readlines()
         self.DataSet = list()
         for line in lines:
