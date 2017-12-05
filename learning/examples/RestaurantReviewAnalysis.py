@@ -4,7 +4,7 @@ from learning.Helper import DataPreprocessing
 
 demo = DataPreprocessing()
 demo.readParagraph("sushiReview.txt", True, '\t')
-demo.convertLevelToBool()
+demo.convertLevelToBinary()
 demo.balanceDataSet()
 dictionary, wordMat = demo.wordBagging(demo.LANG_ENGLISH, demo.SETTYPE_NDARRAY, lambda x: len(x) > 2)
 

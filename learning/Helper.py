@@ -126,7 +126,6 @@ class DataPreprocessing:
         self.DataSet = None
         self.Label = None
         self.graph = None
-        self.ExtraData = None
 
     def __initGraph(self):
         self.graph = plt.figure()
@@ -140,10 +139,9 @@ class DataPreprocessing:
             return False
         return True
 
-    def readSimpleDataSet(self, path, set_form, data_form, sep ="\t", add_title = False, add_label = False):
+    def readSimpleDataSet(self, path, set_form, data_form, sep ="\t", add_label = False):
         assert set_form in self.__SET_FORMAT
         assert data_form in self.__DATA_FORMAT
-        assert isinstance(add_title, bool)
         assert isinstance(add_label, bool)
         assert self.__validPath(path)
         file = open(Util().getDirectory() + "DATA/" + path, "r")
@@ -151,9 +149,6 @@ class DataPreprocessing:
         lines = file.readlines()
         if add_label:
             self.Label = list()
-        if add_title:
-            titleLine = lines.pop(0)
-            self.ExtraData = titleLine.strip().split(" ")
         for line in lines:
             tempData = list()
             splitData = line.strip().split(sep)
@@ -401,7 +396,7 @@ class DataPreprocessing:
         else: self.DataSet = self.DataSet[totalRange]
         self.Label = self.Label[totalRange]
 
-    def convertLevelToBool(self):
+    def convertLevelToBinary(self):
         assert self.DataSet is not None
         assert self.Label is not None
         assert len(set(self.Label)) > 2
