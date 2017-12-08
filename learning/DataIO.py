@@ -4,6 +4,7 @@ import os
 import re
 from learning.Helper import Util
 
+
 class DataIOError:
 
     @staticmethod
@@ -25,17 +26,20 @@ class DataIOError:
             self.wrongTypeError(path.__name__, str, curType=type(path))
         raise SyntaxError("file under %s has syntax issue (does not fit with the requirement"%path)
 
+
 class AcceptedDataFormat(Enum):
     html = ".html"
     json = ".json"
-    xml = ".xml"
     txt = ".txt"
+    xml = ".xml"
     xls = ".xls"
     csv = ".csv"
+
 
 class AcceptedLanguage(Enum):
     chinese = re.compile(r'([\u4E00-\u9FA5]+|\w+)')
     english = re.compile(r'[a-z|A-Z]+')
+
 
 class DataIO:
 
