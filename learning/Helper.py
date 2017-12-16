@@ -387,7 +387,7 @@ class DataPreprocessing:
             range1 = np.hstack((range1, additional1))
         elif modification[1] < 0:
             range1 = range1[np.array([np.random.randint(0, range1.size)
-                                      for _ in range(int(range1.size + modification[1]))])]
+                                      fnor _ in range(int(range1.size + modification[1]))])]
         totalRange = np.hstack((range0, range1))
         if isinstance(self.DataSet, list):
             r = totalRange.tolist()
