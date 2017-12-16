@@ -1,0 +1,22 @@
+<Table>
+	<Row>
+		<Value>1</Value>
+		<Value>3</Value>
+		<Value>4</Value>
+	</Row>
+	<Row>
+		<Value>2</Value>
+		<Value>3</Value>
+		<Value>5</Value>
+	</Row>
+	<Row>
+		<Value>1</Value>
+		<Value>2</Value>
+		<Value>3</Value>
+		<Value>5</Value>
+	</Row>
+	<Row>
+		<Value>2</Value>
+		<Value>5</Value>
+	</Row>
+</Table>

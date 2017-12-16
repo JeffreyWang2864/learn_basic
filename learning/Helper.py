@@ -153,12 +153,14 @@ class DataPreprocessing:
             tempData = list()
             splitData = line.strip().split(sep)
             tempData = [data_form(item) for item in splitData]
+            #tempData = [data_form(item) for item in splitData[:-1]]       # FIXME: get rid of [:-1]
             if add_label:
-                self.Label.append(tempData.pop())
+                self.Label.append(splitData.pop())          # FIXME: change splitData to tempData
             data.append(tempData.copy())
         print("read file successful")
         self.DataSet = set_form(data)
-        self.Label = set_form(self.Label)
+        if add_label:
+            self.Label = set_form(self.Label)
 
     def readXML(self, path, set_form, data_form, add_label = False):
         assert isinstance(path, str)
@@ -321,7 +323,7 @@ class DataPreprocessing:
         assert 0.0 < portion < 1.0
         assert mode in ("DEFAULT", "SAVE", "LOAD")
         if self.Label is not None:
-            trainLabel, testLabel = list(), list()
+            trainLabel, testLbel = list(), list()
         trainData, testData = list(), list()
         Lookup_Table = Util().splitDataSet(len(self.DataSet), portion, mode)
         for i in range(len(Lookup_Table)):
@@ -395,6 +397,16 @@ class DataPreprocessing:
             self.DataSet = new
         else: self.DataSet = self.DataSet[totalRange]
         self.Label = self.Label[totalRange]
+
+    def changeType(self, data, future_type):
+        enum_of_data = set(data)
+        conversionDict = dict()
+        initial_correspond_value = future_type()
+        for item in enum_of_data:
+            conversionDict[item] = initial_correspond_value
+            initial_correspond_value += future_type(1)
+        for i in range(len(data)):
+            data[i] = conversionDict[data[i]]
 
     def convertLevelToBinary(self):
         assert self.DataSet is not None
