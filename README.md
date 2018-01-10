@@ -1,4 +1,7 @@
 # learn_basic
+
+注意：**这个repo已停止更新。正在筹备一个升级版**
+
 this repo contains basic machine learning and deep learning algorithms (so far).
 
 examples:
