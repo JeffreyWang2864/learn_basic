@@ -7,7 +7,6 @@ from learning.Helper import Util
 
 class DataIOError:
 
-    @staticmethod
     def __init__(self):
         raise PermissionError("initializing class `DataIOError` is not allowed")
 
